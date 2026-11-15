@@ -6,6 +6,9 @@
 @import "./trends-charts.css";
 @import "./alerts-center.css";
 @import "./guidance-screen.css";
+@import "./environment-page.css";
+@import "./support-pages.css";
+@import "./flight-surgeon.css";
 @import "tailwindcss";
 
 @theme {
@@ -356,6 +359,8 @@
   width: 184px;
   flex-direction: column;
   justify-content: space-between;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 24px 14px;
   border-right: 1px solid var(--border);
   background: var(--surface-glass);
@@ -365,7 +370,11 @@
 }
 .sidebar nav {
   display: grid;
+  flex: 0 0 auto;
   gap: 8px;
+}
+.support-mark {
+  flex: 0 0 auto;
 }
 .nav-group > .nav-item {
   width: 100%;
@@ -3264,8 +3273,11 @@
     right: 10px;
     bottom: 92px;
     display: grid;
+    max-height: calc(100vh - 120px);
     width: 220px;
     gap: 7px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     padding: 9px 12px 12px;
     border: 1px solid var(--border);
     border-radius: 18px;

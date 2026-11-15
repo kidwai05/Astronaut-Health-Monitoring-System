@@ -24,6 +24,13 @@ import { MoodCheckin } from "./components/MoodCheckin";
 import { TrendsCharts } from "./components/TrendsCharts";
 import { AlertsCenter } from "./components/AlertsCenter";
 import { GuidanceScreen } from "./components/GuidanceScreen";
+import { EnvironmentPage } from "./pages/EnvironmentPage";
+import { RemindersPage } from "./pages/RemindersPage";
+import { ProgressPage } from "./pages/ProgressPage";
+import { RecordsPage } from "./pages/RecordsPage";
+import { HazardsHubPage } from "./pages/HazardsHubPage";
+import { SettingsPage } from "./pages/SettingsPage";
+import { FlightSurgeonPage } from "./pages/surgeon/FlightSurgeonPage";
 
 type LoadPhase = "boot" | "skeleton" | "ready";
 
@@ -33,6 +40,20 @@ const navItems = [
   { label: "Trends", icon: TrendingUp },
   { label: "Alerts", icon: Bell, badge: 2 },
   { label: "More", icon: MoreHorizontal },
+];
+
+const moreNavItems = [
+  "Body Map",
+  "Sleep",
+  "Mood",
+  "Guidance",
+  "Environment",
+  "Reminders",
+  "Progress",
+  "Health Records",
+  "Hazards Learn Hub",
+  "Settings",
+  "Flight Surgeon",
 ];
 
 export default function App() {
@@ -78,6 +99,11 @@ export default function App() {
     } else if (label === "More") {
       setMoreMenuOpen((current) => !current);
     } else notify(`${label} is ready for the next prototype phase`);
+  };
+
+  const navigateToScreen = (screen: string) => {
+    setActiveNav(screen);
+    setMoreMenuOpen(false);
   };
 
   const toggleTheme = () => {
@@ -147,12 +173,7 @@ export default function App() {
             const isMoreSection = item.label === "More";
             const isActive =
               activeNav === item.label ||
-              (isMoreSection &&
-                (moreMenuOpen ||
-                  activeNav === "Body Map" ||
-                  activeNav === "Sleep" ||
-                  activeNav === "Mood" ||
-                  activeNav === "Guidance"));
+              (isMoreSection && (moreMenuOpen || moreNavItems.includes(activeNav)));
             return (
               <div
                 className={`nav-group ${isMoreSection ? "more-group" : ""} ${
@@ -173,42 +194,22 @@ export default function App() {
                 </button>
                 {isMoreSection && (
                   <div className="sidebar-subnav">
-                    <button
-                      className={activeNav === "Body Map" ? "active" : ""}
-                      onClick={() => {
-                        setActiveNav("Body Map");
-                        setMoreMenuOpen(true);
-                      }}
-                    >
-                      Body Map
-                    </button>
-                    <button
-                      className={activeNav === "Sleep" ? "active" : ""}
-                      onClick={() => {
-                        setActiveNav("Sleep");
-                        setMoreMenuOpen(true);
-                      }}
-                    >
-                      Sleep Tracker
-                    </button>
-                    <button
-                      className={activeNav === "Mood" ? "active" : ""}
-                      onClick={() => {
-                        setActiveNav("Mood");
-                        setMoreMenuOpen(true);
-                      }}
-                    >
-                      Mood Check-in
-                    </button>
-                    <button
-                      className={activeNav === "Guidance" ? "active" : ""}
-                      onClick={() => {
-                        setActiveNav("Guidance");
-                        setMoreMenuOpen(true);
-                      }}
-                    >
-                      Guidance
-                    </button>
+                    {moreNavItems.map((label) => (
+                      <button
+                        className={activeNav === label ? "active" : ""}
+                        key={label}
+                        onClick={() => {
+                          setActiveNav(label);
+                          setMoreMenuOpen(true);
+                        }}
+                      >
+                        {label === "Sleep"
+                          ? "Sleep Tracker"
+                          : label === "Mood"
+                            ? "Mood Check-in"
+                            : label}
+                      </button>
+                    ))}
                   </div>
                 )}
               </div>
@@ -258,6 +259,20 @@ export default function App() {
         <MoodCheckin onNotify={notify} />
       ) : activeNav === "Guidance" ? (
         <GuidanceScreen onNotify={notify} />
+      ) : activeNav === "Environment" ? (
+        <EnvironmentPage onNotify={notify} />
+      ) : activeNav === "Reminders" ? (
+        <RemindersPage onNotify={notify} />
+      ) : activeNav === "Progress" ? (
+        <ProgressPage onNavigate={navigateToScreen} />
+      ) : activeNav === "Health Records" ? (
+        <RecordsPage onNotify={notify} />
+      ) : activeNav === "Hazards Learn Hub" ? (
+        <HazardsHubPage onNavigate={navigateToScreen} />
+      ) : activeNav === "Settings" ? (
+        <SettingsPage onNotify={notify} />
+      ) : activeNav === "Flight Surgeon" ? (
+        <FlightSurgeonPage onNotify={notify} />
       ) : (
         <HomeDashboard onNotify={notify} />
       )}
@@ -270,12 +285,7 @@ export default function App() {
               key={item.label}
               className={
                 activeNav === item.label ||
-                (item.label === "More" &&
-                  (moreMenuOpen ||
-                    activeNav === "Body Map" ||
-                    activeNav === "Sleep" ||
-                    activeNav === "Mood" ||
-                    activeNav === "Guidance"))
+                (item.label === "More" && (moreMenuOpen || moreNavItems.includes(activeNav)))
                   ? "active"
                   : ""
               }
@@ -294,42 +304,15 @@ export default function App() {
         <div className="mobile-more-menu">
           <div className="mobile-more-handle" />
           <span>MORE HEALTH TOOLS</span>
-          <button
-            className={activeNav === "Body Map" ? "active" : ""}
-            onClick={() => {
-              setActiveNav("Body Map");
-              setMoreMenuOpen(false);
-            }}
-          >
-            Body Map
-          </button>
-          <button
-            className={activeNav === "Sleep" ? "active" : ""}
-            onClick={() => {
-              setActiveNav("Sleep");
-              setMoreMenuOpen(false);
-            }}
-          >
-            Sleep Tracker
-          </button>
-          <button
-            className={activeNav === "Mood" ? "active" : ""}
-            onClick={() => {
-              setActiveNav("Mood");
-              setMoreMenuOpen(false);
-            }}
-          >
-            Mood Check-in
-          </button>
-          <button
-            className={activeNav === "Guidance" ? "active" : ""}
-            onClick={() => {
-              setActiveNav("Guidance");
-              setMoreMenuOpen(false);
-            }}
-          >
-            Guidance
-          </button>
+          {moreNavItems.map((label) => (
+            <button
+              className={activeNav === label ? "active" : ""}
+              key={label}
+              onClick={() => navigateToScreen(label)}
+            >
+              {label === "Sleep" ? "Sleep Tracker" : label === "Mood" ? "Mood Check-in" : label}
+            </button>
+          ))}
         </div>
       )}
       {toast && <Toast message={toast} onClose={() => setToast(null)} />}
