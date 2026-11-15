@@ -1,0 +1,3 @@
+{
+  "_description": "Single source of truth for thresholds (section 5.3). Mirrors backend/app/seed/seed_alert_rules.py. Mark \"to be reviewed by medical professionals\""
+}

@@ -1,0 +1,1 @@
+// Absolute threshold rule
