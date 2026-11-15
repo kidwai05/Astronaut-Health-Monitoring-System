@@ -1,0 +1,468 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Write `shared/alert-rules/schema.json`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745748816
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794746078415
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794746148211
+      }
+    ],
+    "1.2 Write `shared/alert-rules/default_rules.json`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745749640
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794746153048
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794748617276
+      }
+    ],
+    "1.3 Write `shared/test-vectors/alert_cases.json`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745750422
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794748629592
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794750173766
+      }
+    ],
+    "2.1 Implement `app/services/alert_engine/loader.py` — `AlertRuleLoader`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745750904
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794750179329
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794750497052
+      }
+    ],
+    "2.2 Implement `app/services/alert_engine/threshold.py` — `ThresholdEvaluator`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745752040
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794750503198
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794751017616
+      }
+    ],
+    "2.4 Implement `app/services/alert_engine/baseline_dev.py` — `BaselineDeviationEvaluator`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745752327
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794750503864
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794751018350
+      }
+    ],
+    "2.6 Implement `app/services/alert_engine/trend.py` — `TrendEvaluator`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745752712
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794750504472
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794751019086
+      }
+    ],
+    "2.8 Implement `app/services/alert_engine/engine.py` — `AlertEngine`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745753111
+      },
+      {
+        "executionId": "d23f28b2-d09f-4090-9547-eaf65f418221",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794754448943
+      },
+      {
+        "executionId": "d23f28b2-d09f-4090-9547-eaf65f418221",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794755825106
+      }
+    ],
+    "3.1 Add `secret_key: str` to `app/config.py` `Settings`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745753650
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794750179810
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794750497699
+      }
+    ],
+    "3.2 Implement `app/deps.py` JWT dependency": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745753986
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794750505863
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794751019593
+      }
+    ],
+    "3.3 Implement `app/api/v1/auth.py`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745754417
+      },
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794751029734
+      },
+      {
+        "executionId": "d23f28b2-d09f-4090-9547-eaf65f418221",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794752712632
+      },
+      {
+        "executionId": "d23f28b2-d09f-4090-9547-eaf65f418221",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794754425296
+      }
+    ],
+    "4.1 Implement `app/api/v1/ws.py` — `ConnectionManager` and WebSocket endpoint": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745754776
+      },
+      {
+        "executionId": "d23f28b2-d09f-4090-9547-eaf65f418221",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794754472936
+      },
+      {
+        "executionId": "d23f28b2-d09f-4090-9547-eaf65f418221",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794755833082
+      }
+    ],
+    "4.3 Implement `app/api/v1/dashboard.py`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745755137
+      },
+      {
+        "executionId": "d23f28b2-d09f-4090-9547-eaf65f418221",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794755848564
+      },
+      {
+        "executionId": "c58a0ffb-ee7e-4b53-b7c0-057736a7e0da",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794756214406
+      },
+      {
+        "executionId": "7cbc1857-39fa-4e0d-ae33-6adda4836acc",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794756414946
+      }
+    ],
+    "4.5 Implement `app/api/v1/alerts.py`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745755683
+      },
+      {
+        "executionId": "d23f28b2-d09f-4090-9547-eaf65f418221",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794755856801
+      },
+      {
+        "executionId": "c58a0ffb-ee7e-4b53-b7c0-057736a7e0da",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794756215281
+      },
+      {
+        "executionId": "7cbc1857-39fa-4e0d-ae33-6adda4836acc",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794756415922
+      }
+    ],
+    "5.1 Implement `app/api/v1/trends.py`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745756137
+      }
+    ],
+    "5.3 Implement `app/services/guidance_service.py` — `GuidanceService`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745756484
+      }
+    ],
+    "5.5 Implement `app/api/v1/guidance.py`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745756750
+      }
+    ],
+    "5.6 Implement `app/api/v1/reminders.py`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745757042
+      }
+    ],
+    "5.8 Complete `app/api/v1/environment.py` — add GET with filters and alert trigger": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745757381
+      }
+    ],
+    "5.10 Implement `app/api/v1/reports.py`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745757637
+      }
+    ],
+    "6. Backend checkpoint": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745757924
+      }
+    ],
+    "7.1 Implement `src/db/schema.ts` — Dexie v1 schema": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745758236
+      }
+    ],
+    "7.2 Implement `src/db/repositories/syncQueue.ts` — `syncQueueRepo`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745758538
+      }
+    ],
+    "7.3 Implement `src/db/repositories/measurements.ts` — `measurementsRepo`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745758793
+      }
+    ],
+    "7.5 Implement `src/db/repositories/alerts.ts` — `alertsRepo`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745759212
+      }
+    ],
+    "7.7 Implement `src/db/repositories/sleep.ts`, `mood.ts`, `symptoms.ts`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745759641
+      }
+    ],
+    "8.1 Implement `src/store/useAppStore.ts` — Zustand store with persistence": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745760051
+      }
+    ],
+    "8.4 Implement `src/api/client.ts` — typed API client": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745760513
+      }
+    ],
+    "9.1 Implement `src/sync/syncQueue.ts`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745760897
+      }
+    ],
+    "9.2 Implement `src/sync/conflict.ts` — last-write-wins": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745761269
+      }
+    ],
+    "9.4 Implement `src/sync/pushPull.ts` — push/pull orchestration": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745761529
+      }
+    ],
+    "9.6 Implement `src/sync/useConnectivity.ts`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745761923
+      }
+    ],
+    "9.7 Implement `src/hooks/useAlertSocket.ts`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745762313
+      }
+    ],
+    "10.1 Implement `src/pages/LoginPage.tsx`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745762608
+      }
+    ],
+    "10.2 Implement `src/pages/HomePage.tsx`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745763020
+      }
+    ],
+    "10.3 Implement `src/pages/QuickLogPage.tsx`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745763382
+      }
+    ],
+    "10.4 Implement `src/pages/AlertsPage.tsx`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745763777
+      }
+    ],
+    "11.1 Implement `src/routes.tsx`": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745764117
+      }
+    ],
+    "12.1 Implement backend `tests/unit/test_alert_rules.py` — pytest test-vector runner": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745764571
+      }
+    ],
+    "12.2 Implement frontend `tests/unit/alertEngine.test.ts` — vitest test-vector runner": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745765038
+      }
+    ],
+    "13. Final checkpoint": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794745765365
+      }
+    ],
+    "1. Shared alert-rule schema and default rules": [
+      {
+        "executionId": "a7c1dcf8-8dec-4143-b9e1-e7689b2e9f83",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794750174317
+      }
+    ],
+    "3. Backend auth and JWT configuration": [
+      {
+        "executionId": "d23f28b2-d09f-4090-9547-eaf65f418221",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794754425753
+      }
+    ],
+    "2. Backend alert engine package": [
+      {
+        "executionId": "d23f28b2-d09f-4090-9547-eaf65f418221",
+        "chatSessionId": "sess_cd8d3a0d-a8c6-462c-b846-5d193134a052",
+        "timestamp": 1794755825230
+      }
+    ]
+  }
+}

@@ -1,0 +1,251 @@
+[
+  {
+    "id": "thr_heart_rate",
+    "metric": "heart_rate",
+    "rule_type": "threshold",
+    "severity": "critical",
+    "enabled": true,
+    "params": {
+      "low_critical": 40,
+      "low_warning": 50,
+      "high_warning": 110,
+      "high_critical": 150
+    },
+    "description": "Heart rate threshold alerts: critical below 40 bpm or above 150 bpm, warning below 50 bpm or above 110 bpm"
+  },
+  {
+    "id": "thr_blood_pressure_systolic",
+    "metric": "blood_pressure_systolic",
+    "rule_type": "threshold",
+    "severity": "critical",
+    "enabled": true,
+    "params": {
+      "low_warning": 90,
+      "high_warning": 140,
+      "high_critical": 180
+    },
+    "description": "Systolic blood pressure threshold alerts: warning below 90 mmHg or above 140 mmHg, critical above 180 mmHg"
+  },
+  {
+    "id": "thr_blood_pressure_diastolic",
+    "metric": "blood_pressure_diastolic",
+    "rule_type": "threshold",
+    "severity": "critical",
+    "enabled": true,
+    "params": {
+      "high_warning": 90,
+      "high_critical": 120
+    },
+    "description": "Diastolic blood pressure threshold alerts: warning above 90 mmHg, critical above 120 mmHg"
+  },
+  {
+    "id": "thr_glucose",
+    "metric": "glucose",
+    "rule_type": "threshold",
+    "severity": "critical",
+    "enabled": true,
+    "params": {
+      "low_critical": 54,
+      "low_warning": 70,
+      "high_warning": 180,
+      "high_critical": 250
+    },
+    "description": "Blood glucose threshold alerts: critical below 54 mg/dL or above 250 mg/dL, warning below 70 mg/dL or above 180 mg/dL"
+  },
+  {
+    "id": "thr_temperature_c",
+    "metric": "temperature_c",
+    "rule_type": "threshold",
+    "severity": "critical",
+    "enabled": true,
+    "params": {
+      "low_critical": 34.0,
+      "low_warning": 35.0,
+      "high_warning": 38.0,
+      "high_critical": 39.5
+    },
+    "description": "Body temperature threshold alerts: critical below 34.0°C or above 39.5°C, warning below 35.0°C or above 38.0°C"
+  },
+  {
+    "id": "thr_spo2",
+    "metric": "spo2",
+    "rule_type": "threshold",
+    "severity": "critical",
+    "enabled": true,
+    "params": {
+      "low_warning": 94,
+      "low_critical": 90
+    },
+    "description": "Blood oxygen saturation threshold alerts: warning below 94%, critical below 90%"
+  },
+  {
+    "id": "thr_co2_ppm",
+    "metric": "co2_ppm",
+    "rule_type": "threshold",
+    "severity": "critical",
+    "enabled": true,
+    "params": {
+      "high_warning": 2000,
+      "high_critical": 5000
+    },
+    "description": "Cabin CO2 concentration threshold alerts: warning above 2000 ppm, critical above 5000 ppm"
+  },
+  {
+    "id": "thr_o2_pct",
+    "metric": "o2_pct",
+    "rule_type": "threshold",
+    "severity": "critical",
+    "enabled": true,
+    "params": {
+      "low_warning": 19.5,
+      "low_critical": 16.0
+    },
+    "description": "Cabin oxygen percentage threshold alerts: warning below 19.5%, critical below 16.0%"
+  },
+  {
+    "id": "dev_heart_rate_caution",
+    "metric": "heart_rate",
+    "rule_type": "baseline_deviation",
+    "severity": "caution",
+    "enabled": true,
+    "params": {
+      "z_score_threshold": 2.0
+    },
+    "description": "Heart rate caution alert when reading deviates ≥2.0 standard deviations from personal baseline"
+  },
+  {
+    "id": "dev_heart_rate_warning",
+    "metric": "heart_rate",
+    "rule_type": "baseline_deviation",
+    "severity": "warning",
+    "enabled": true,
+    "params": {
+      "z_score_threshold": 3.0
+    },
+    "description": "Heart rate warning alert when reading deviates ≥3.0 standard deviations from personal baseline"
+  },
+  {
+    "id": "dev_blood_pressure_systolic_caution",
+    "metric": "blood_pressure_systolic",
+    "rule_type": "baseline_deviation",
+    "severity": "caution",
+    "enabled": true,
+    "params": {
+      "z_score_threshold": 2.0
+    },
+    "description": "Systolic blood pressure caution alert when reading deviates ≥2.0 standard deviations from personal baseline"
+  },
+  {
+    "id": "dev_blood_pressure_systolic_warning",
+    "metric": "blood_pressure_systolic",
+    "rule_type": "baseline_deviation",
+    "severity": "warning",
+    "enabled": true,
+    "params": {
+      "z_score_threshold": 3.0
+    },
+    "description": "Systolic blood pressure warning alert when reading deviates ≥3.0 standard deviations from personal baseline"
+  },
+  {
+    "id": "dev_glucose_caution",
+    "metric": "glucose",
+    "rule_type": "baseline_deviation",
+    "severity": "caution",
+    "enabled": true,
+    "params": {
+      "z_score_threshold": 2.0
+    },
+    "description": "Blood glucose caution alert when reading deviates ≥2.0 standard deviations from personal baseline"
+  },
+  {
+    "id": "dev_glucose_warning",
+    "metric": "glucose",
+    "rule_type": "baseline_deviation",
+    "severity": "warning",
+    "enabled": true,
+    "params": {
+      "z_score_threshold": 3.0
+    },
+    "description": "Blood glucose warning alert when reading deviates ≥3.0 standard deviations from personal baseline"
+  },
+  {
+    "id": "dev_temperature_c_caution",
+    "metric": "temperature_c",
+    "rule_type": "baseline_deviation",
+    "severity": "caution",
+    "enabled": true,
+    "params": {
+      "z_score_threshold": 2.0
+    },
+    "description": "Body temperature caution alert when reading deviates ≥2.0 standard deviations from personal baseline"
+  },
+  {
+    "id": "dev_temperature_c_warning",
+    "metric": "temperature_c",
+    "rule_type": "baseline_deviation",
+    "severity": "warning",
+    "enabled": true,
+    "params": {
+      "z_score_threshold": 3.0
+    },
+    "description": "Body temperature warning alert when reading deviates ≥3.0 standard deviations from personal baseline"
+  },
+  {
+    "id": "dev_spo2_caution",
+    "metric": "spo2",
+    "rule_type": "baseline_deviation",
+    "severity": "caution",
+    "enabled": true,
+    "params": {
+      "z_score_threshold": 2.0
+    },
+    "description": "SpO2 caution alert when reading deviates ≥2.0 standard deviations from personal baseline"
+  },
+  {
+    "id": "dev_spo2_warning",
+    "metric": "spo2",
+    "rule_type": "baseline_deviation",
+    "severity": "warning",
+    "enabled": true,
+    "params": {
+      "z_score_threshold": 3.0
+    },
+    "description": "SpO2 warning alert when reading deviates ≥3.0 standard deviations from personal baseline"
+  },
+  {
+    "id": "trend_heart_rate_rising",
+    "metric": "heart_rate",
+    "rule_type": "trend",
+    "severity": "caution",
+    "enabled": true,
+    "params": {
+      "window": 5,
+      "direction": "rising"
+    },
+    "description": "Heart rate trend alert when 5 consecutive readings show a strictly rising pattern"
+  },
+  {
+    "id": "trend_glucose_rising",
+    "metric": "glucose",
+    "rule_type": "trend",
+    "severity": "caution",
+    "enabled": true,
+    "params": {
+      "window": 5,
+      "direction": "rising"
+    },
+    "description": "Blood glucose trend alert when 5 consecutive readings show a strictly rising pattern"
+  },
+  {
+    "id": "trend_spo2_falling",
+    "metric": "spo2",
+    "rule_type": "trend",
+    "severity": "caution",
+    "enabled": true,
+    "params": {
+      "window": 5,
+      "direction": "falling"
+    },
+    "description": "SpO2 trend alert when 5 consecutive readings show a strictly falling pattern"
+  }
+]

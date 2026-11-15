@@ -1,0 +1,1 @@
+# CI: pytest (backend), vitest (frontend), playwright (e2e), shared test-vector check

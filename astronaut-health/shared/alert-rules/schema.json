@@ -1,0 +1,114 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://astronaut-health/shared/alert-rules/schema.json",
+  "title": "AlertRule",
+  "description": "Schema for a single alert rule entry in default_rules.json",
+  "type": "object",
+  "required": ["id", "metric", "rule_type", "severity", "enabled", "params"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique rule identifier"
+    },
+    "metric": {
+      "type": "string",
+      "description": "Vital metric name (e.g. heart_rate)"
+    },
+    "rule_type": {
+      "type": "string",
+      "enum": ["threshold", "baseline_deviation", "trend"],
+      "description": "Evaluation strategy for this rule"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["info", "caution", "warning", "critical"],
+      "description": "Alert severity level"
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether this rule is active"
+    },
+    "params": {
+      "type": "object",
+      "description": "Rule-type-specific parameters"
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the rule"
+    }
+  },
+  "if": {
+    "properties": { "rule_type": { "const": "threshold" } },
+    "required": ["rule_type"]
+  },
+  "then": {
+    "properties": {
+      "params": {
+        "type": "object",
+        "properties": {
+          "low_warning":   { "type": "number" },
+          "low_critical":  { "type": "number" },
+          "high_warning":  { "type": "number" },
+          "high_critical": { "type": "number" }
+        },
+        "anyOf": [
+          { "required": ["low_warning"] },
+          { "required": ["low_critical"] },
+          { "required": ["high_warning"] },
+          { "required": ["high_critical"] }
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "else": {
+    "if": {
+      "properties": { "rule_type": { "const": "baseline_deviation" } },
+      "required": ["rule_type"]
+    },
+    "then": {
+      "properties": {
+        "params": {
+          "type": "object",
+          "required": ["z_score_threshold"],
+          "properties": {
+            "z_score_threshold": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Number of standard deviations from baseline to trigger alert"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "else": {
+      "if": {
+        "properties": { "rule_type": { "const": "trend" } },
+        "required": ["rule_type"]
+      },
+      "then": {
+        "properties": {
+          "params": {
+            "type": "object",
+            "required": ["window", "direction"],
+            "properties": {
+              "window": {
+                "type": "integer",
+                "minimum": 2,
+                "description": "Number of recent readings to evaluate the trend over"
+              },
+              "direction": {
+                "type": "string",
+                "enum": ["rising", "falling"],
+                "description": "Expected direction of the trend"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  }
+}

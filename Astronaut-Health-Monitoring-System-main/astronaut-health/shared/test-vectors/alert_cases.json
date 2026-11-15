@@ -1,0 +1,3 @@
+{
+  "_description": "Input readings -> expected alerts. Run by BOTH pytest and vitest so device and server agree"
+}

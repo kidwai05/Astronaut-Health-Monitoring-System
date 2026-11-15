@@ -1,0 +1,589 @@
+[
+  {
+    "id": "thr_heart_rate_critical_high",
+    "rule_id": "thr_heart_rate",
+    "description": "Heart rate 155 bpm exceeds high_critical threshold of 150 → critical alert",
+    "input": {
+      "metric": "heart_rate",
+      "value": 155,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [80, 82, 85, 90, 155]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "heart_rate", "severity": "critical" }
+    ]
+  },
+  {
+    "id": "thr_heart_rate_warning_high",
+    "rule_id": "thr_heart_rate",
+    "description": "Heart rate 115 bpm exceeds high_warning threshold of 110 → warning alert",
+    "input": {
+      "metric": "heart_rate",
+      "value": 115,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [75, 80, 85, 95, 115]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "heart_rate", "severity": "warning" }
+    ]
+  },
+  {
+    "id": "thr_heart_rate_warning_low",
+    "rule_id": "thr_heart_rate",
+    "description": "Heart rate 48 bpm is below low_warning threshold of 50 → warning alert",
+    "input": {
+      "metric": "heart_rate",
+      "value": 48,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [65, 60, 55, 50, 48]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "heart_rate", "severity": "warning" }
+    ]
+  },
+  {
+    "id": "thr_heart_rate_critical_low",
+    "rule_id": "thr_heart_rate",
+    "description": "Heart rate 38 bpm is below low_critical threshold of 40 → critical alert",
+    "input": {
+      "metric": "heart_rate",
+      "value": 38,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [55, 50, 45, 42, 38]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "heart_rate", "severity": "critical" }
+    ]
+  },
+  {
+    "id": "thr_heart_rate_normal",
+    "rule_id": "thr_heart_rate",
+    "description": "Heart rate 75 bpm is within normal range → no threshold alerts",
+    "input": {
+      "metric": "heart_rate",
+      "value": 75,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [72, 74, 76, 73, 75]
+    },
+    "expected_alerts": []
+  },
+  {
+    "id": "thr_bp_systolic_critical_high",
+    "rule_id": "thr_blood_pressure_systolic",
+    "description": "Systolic BP 185 mmHg exceeds high_critical threshold of 180 → critical alert",
+    "input": {
+      "metric": "blood_pressure_systolic",
+      "value": 185,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [120, 125, 130, 150, 185]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "blood_pressure_systolic", "severity": "critical" }
+    ]
+  },
+  {
+    "id": "thr_bp_systolic_warning_high",
+    "rule_id": "thr_blood_pressure_systolic",
+    "description": "Systolic BP 145 mmHg exceeds high_warning threshold of 140 → warning alert",
+    "input": {
+      "metric": "blood_pressure_systolic",
+      "value": 145,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [120, 125, 130, 138, 145]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "blood_pressure_systolic", "severity": "warning" }
+    ]
+  },
+  {
+    "id": "thr_bp_systolic_warning_low",
+    "rule_id": "thr_blood_pressure_systolic",
+    "description": "Systolic BP 85 mmHg is below low_warning threshold of 90 → warning alert",
+    "input": {
+      "metric": "blood_pressure_systolic",
+      "value": 85,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [115, 110, 100, 92, 85]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "blood_pressure_systolic", "severity": "warning" }
+    ]
+  },
+  {
+    "id": "thr_bp_diastolic_critical_high",
+    "rule_id": "thr_blood_pressure_diastolic",
+    "description": "Diastolic BP 125 mmHg exceeds high_critical threshold of 120 → critical alert",
+    "input": {
+      "metric": "blood_pressure_diastolic",
+      "value": 125,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [80, 85, 90, 110, 125]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "blood_pressure_diastolic", "severity": "critical" }
+    ]
+  },
+  {
+    "id": "thr_bp_diastolic_warning_high",
+    "rule_id": "thr_blood_pressure_diastolic",
+    "description": "Diastolic BP 95 mmHg exceeds high_warning threshold of 90 → warning alert",
+    "input": {
+      "metric": "blood_pressure_diastolic",
+      "value": 95,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [78, 80, 83, 88, 95]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "blood_pressure_diastolic", "severity": "warning" }
+    ]
+  },
+  {
+    "id": "thr_glucose_critical_low",
+    "rule_id": "thr_glucose",
+    "description": "Glucose 50 mg/dL is below low_critical threshold of 54 → critical alert",
+    "input": {
+      "metric": "glucose",
+      "value": 50,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [95, 85, 72, 60, 50]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "glucose", "severity": "critical" }
+    ]
+  },
+  {
+    "id": "thr_glucose_warning_low",
+    "rule_id": "thr_glucose",
+    "description": "Glucose 65 mg/dL is below low_warning threshold of 70 → warning alert",
+    "input": {
+      "metric": "glucose",
+      "value": 65,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [100, 90, 80, 72, 65]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "glucose", "severity": "warning" }
+    ]
+  },
+  {
+    "id": "thr_glucose_critical_high",
+    "rule_id": "thr_glucose",
+    "description": "Glucose 260 mg/dL exceeds high_critical threshold of 250 → critical alert",
+    "input": {
+      "metric": "glucose",
+      "value": 260,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [120, 150, 180, 220, 260]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "glucose", "severity": "critical" }
+    ]
+  },
+  {
+    "id": "thr_glucose_warning_high",
+    "rule_id": "thr_glucose",
+    "description": "Glucose 190 mg/dL exceeds high_warning threshold of 180 → warning alert",
+    "input": {
+      "metric": "glucose",
+      "value": 190,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [120, 140, 160, 175, 190]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "glucose", "severity": "warning" }
+    ]
+  },
+  {
+    "id": "thr_temperature_c_critical_low",
+    "rule_id": "thr_temperature_c",
+    "description": "Body temperature 33.5°C is below low_critical threshold of 34.0 → critical alert",
+    "input": {
+      "metric": "temperature_c",
+      "value": 33.5,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [36.5, 36.2, 35.8, 34.5, 33.5]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "temperature_c", "severity": "critical" }
+    ]
+  },
+  {
+    "id": "thr_temperature_c_warning_low",
+    "rule_id": "thr_temperature_c",
+    "description": "Body temperature 34.5°C is below low_warning threshold of 35.0 → warning alert",
+    "input": {
+      "metric": "temperature_c",
+      "value": 34.5,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [36.6, 36.4, 36.0, 35.5, 34.5]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "temperature_c", "severity": "warning" }
+    ]
+  },
+  {
+    "id": "thr_temperature_c_critical_high",
+    "rule_id": "thr_temperature_c",
+    "description": "Body temperature 40.0°C exceeds high_critical threshold of 39.5 → critical alert",
+    "input": {
+      "metric": "temperature_c",
+      "value": 40.0,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [36.7, 37.2, 38.1, 39.0, 40.0]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "temperature_c", "severity": "critical" }
+    ]
+  },
+  {
+    "id": "thr_temperature_c_warning_high",
+    "rule_id": "thr_temperature_c",
+    "description": "Body temperature 38.5°C exceeds high_warning threshold of 38.0 → warning alert",
+    "input": {
+      "metric": "temperature_c",
+      "value": 38.5,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [36.6, 36.9, 37.5, 38.0, 38.5]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "temperature_c", "severity": "warning" }
+    ]
+  },
+  {
+    "id": "thr_spo2_critical_low",
+    "rule_id": "thr_spo2",
+    "description": "SpO2 88% is below low_critical threshold of 90 → critical alert",
+    "input": {
+      "metric": "spo2",
+      "value": 88,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [98, 96, 94, 91, 88]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "spo2", "severity": "critical" }
+    ]
+  },
+  {
+    "id": "thr_spo2_warning_low",
+    "rule_id": "thr_spo2",
+    "description": "SpO2 92% is below low_warning threshold of 94 → warning alert",
+    "input": {
+      "metric": "spo2",
+      "value": 92,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [98, 97, 96, 94, 92]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "spo2", "severity": "warning" }
+    ]
+  },
+  {
+    "id": "thr_co2_ppm_critical_high",
+    "rule_id": "thr_co2_ppm",
+    "description": "Cabin CO2 6000 ppm exceeds high_critical threshold of 5000 → critical alert",
+    "input": {
+      "metric": "co2_ppm",
+      "value": 6000,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [800, 1200, 2500, 4000, 6000]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "co2_ppm", "severity": "critical" }
+    ]
+  },
+  {
+    "id": "thr_co2_ppm_warning_high",
+    "rule_id": "thr_co2_ppm",
+    "description": "Cabin CO2 2500 ppm exceeds high_warning threshold of 2000 → warning alert",
+    "input": {
+      "metric": "co2_ppm",
+      "value": 2500,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [800, 1000, 1500, 2000, 2500]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "co2_ppm", "severity": "warning" }
+    ]
+  },
+  {
+    "id": "thr_o2_pct_critical_low",
+    "rule_id": "thr_o2_pct",
+    "description": "Cabin O2 15.0% is below low_critical threshold of 16.0 → critical alert",
+    "input": {
+      "metric": "o2_pct",
+      "value": 15.0,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [20.9, 20.0, 18.5, 17.0, 15.0]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "o2_pct", "severity": "critical" }
+    ]
+  },
+  {
+    "id": "thr_o2_pct_warning_low",
+    "rule_id": "thr_o2_pct",
+    "description": "Cabin O2 19.0% is below low_warning threshold of 19.5 → warning alert",
+    "input": {
+      "metric": "o2_pct",
+      "value": 19.0,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [20.9, 20.5, 20.2, 19.6, 19.0]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "o2_pct", "severity": "warning" }
+    ]
+  },
+  {
+    "id": "dev_heart_rate_caution_2sd",
+    "rule_id": "dev_heart_rate_caution",
+    "description": "Heart rate exactly 2.0 std devs above personal mean (z=2.0) → caution baseline deviation alert",
+    "input": {
+      "metric": "heart_rate",
+      "value": 90,
+      "baseline_mean": 70,
+      "baseline_std_dev": 10,
+      "recent_readings": [70, 72, 68, 73, 90]
+    },
+    "expected_alerts": [
+      { "rule_type": "baseline_deviation", "metric": "heart_rate", "severity": "caution" }
+    ]
+  },
+  {
+    "id": "dev_heart_rate_warning_3sd",
+    "rule_id": "dev_heart_rate_warning",
+    "description": "Heart rate exactly 3.0 std devs above personal mean (z=3.0) → warning baseline deviation alert (also triggers caution)",
+    "input": {
+      "metric": "heart_rate",
+      "value": 100,
+      "baseline_mean": 70,
+      "baseline_std_dev": 10,
+      "recent_readings": [70, 72, 68, 73, 100]
+    },
+    "expected_alerts": [
+      { "rule_type": "baseline_deviation", "metric": "heart_rate", "severity": "caution" },
+      { "rule_type": "baseline_deviation", "metric": "heart_rate", "severity": "warning" }
+    ]
+  },
+  {
+    "id": "dev_heart_rate_no_baseline",
+    "rule_id": "dev_heart_rate_caution",
+    "description": "Heart rate 95 bpm with no baseline established (null mean/std_dev) → no baseline deviation alerts and no threshold alert (95 is within normal range)",
+    "input": {
+      "metric": "heart_rate",
+      "value": 95,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [70, 72, 68, 73, 95]
+    },
+    "expected_alerts": []
+  },
+  {
+    "id": "dev_glucose_caution_2_5sd",
+    "rule_id": "dev_glucose_caution",
+    "description": "Glucose 2.5 std devs above personal mean (z=2.5) → caution baseline deviation alert (threshold remains normal)",
+    "input": {
+      "metric": "glucose",
+      "value": 145,
+      "baseline_mean": 95,
+      "baseline_std_dev": 20,
+      "recent_readings": [95, 98, 100, 110, 145]
+    },
+    "expected_alerts": [
+      { "rule_type": "baseline_deviation", "metric": "glucose", "severity": "caution" }
+    ]
+  },
+  {
+    "id": "dev_spo2_caution_2_1sd_below",
+    "rule_id": "dev_spo2_caution",
+    "description": "SpO2 2.1 std devs below personal mean (z=−2.1) → caution baseline deviation alert (threshold remains normal)",
+    "input": {
+      "metric": "spo2",
+      "value": 94.9,
+      "baseline_mean": 98,
+      "baseline_std_dev": 1.5,
+      "recent_readings": [98, 97.5, 97, 96, 94.9]
+    },
+    "expected_alerts": [
+      { "rule_type": "baseline_deviation", "metric": "spo2", "severity": "caution" }
+    ]
+  },
+  {
+    "id": "dev_bp_systolic_caution_2sd",
+    "rule_id": "dev_blood_pressure_systolic_caution",
+    "description": "Systolic BP exactly 2.0 std devs above mean (z=2.0) → caution baseline deviation alert (within threshold bounds)",
+    "input": {
+      "metric": "blood_pressure_systolic",
+      "value": 136,
+      "baseline_mean": 120,
+      "baseline_std_dev": 8,
+      "recent_readings": [118, 120, 122, 125, 136]
+    },
+    "expected_alerts": [
+      { "rule_type": "baseline_deviation", "metric": "blood_pressure_systolic", "severity": "caution" }
+    ]
+  },
+  {
+    "id": "dev_bp_systolic_warning_3sd",
+    "rule_id": "dev_blood_pressure_systolic_warning",
+    "description": "Systolic BP exactly 3.0 std devs above mean (z=3.0) → both caution and warning baseline deviation alerts",
+    "input": {
+      "metric": "blood_pressure_systolic",
+      "value": 144,
+      "baseline_mean": 120,
+      "baseline_std_dev": 8,
+      "recent_readings": [118, 120, 122, 130, 144]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "blood_pressure_systolic", "severity": "warning" },
+      { "rule_type": "baseline_deviation", "metric": "blood_pressure_systolic", "severity": "caution" },
+      { "rule_type": "baseline_deviation", "metric": "blood_pressure_systolic", "severity": "warning" }
+    ]
+  },
+  {
+    "id": "dev_temperature_c_caution_2sd",
+    "rule_id": "dev_temperature_c_caution",
+    "description": "Body temperature exactly 2.0 std devs above mean (z=2.0) → caution baseline deviation alert",
+    "input": {
+      "metric": "temperature_c",
+      "value": 37.6,
+      "baseline_mean": 36.6,
+      "baseline_std_dev": 0.5,
+      "recent_readings": [36.5, 36.6, 36.7, 36.8, 37.6]
+    },
+    "expected_alerts": [
+      { "rule_type": "baseline_deviation", "metric": "temperature_c", "severity": "caution" }
+    ]
+  },
+  {
+    "id": "dev_temperature_c_warning_3sd",
+    "rule_id": "dev_temperature_c_warning",
+    "description": "Body temperature exactly 3.0 std devs above mean (z=3.0) → both caution and warning baseline deviation alerts",
+    "input": {
+      "metric": "temperature_c",
+      "value": 38.1,
+      "baseline_mean": 36.6,
+      "baseline_std_dev": 0.5,
+      "recent_readings": [36.5, 36.6, 36.7, 36.8, 38.1]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "temperature_c", "severity": "warning" },
+      { "rule_type": "baseline_deviation", "metric": "temperature_c", "severity": "caution" },
+      { "rule_type": "baseline_deviation", "metric": "temperature_c", "severity": "warning" }
+    ]
+  },
+  {
+    "id": "dev_glucose_warning_3sd",
+    "rule_id": "dev_glucose_warning",
+    "description": "Glucose exactly 3.0 std devs above mean (z=3.0) → both caution and warning baseline deviation alerts",
+    "input": {
+      "metric": "glucose",
+      "value": 155,
+      "baseline_mean": 95,
+      "baseline_std_dev": 20,
+      "recent_readings": [95, 98, 100, 110, 155]
+    },
+    "expected_alerts": [
+      { "rule_type": "baseline_deviation", "metric": "glucose", "severity": "caution" },
+      { "rule_type": "baseline_deviation", "metric": "glucose", "severity": "warning" }
+    ]
+  },
+  {
+    "id": "dev_spo2_warning_3sd",
+    "rule_id": "dev_spo2_warning",
+    "description": "SpO2 exactly 3.0 std devs below mean (z=−3.0) → both caution and warning baseline deviation alerts",
+    "input": {
+      "metric": "spo2",
+      "value": 93.5,
+      "baseline_mean": 98,
+      "baseline_std_dev": 1.5,
+      "recent_readings": [98, 97, 96, 95, 93.5]
+    },
+    "expected_alerts": [
+      { "rule_type": "threshold", "metric": "spo2", "severity": "warning" },
+      { "rule_type": "baseline_deviation", "metric": "spo2", "severity": "caution" },
+      { "rule_type": "baseline_deviation", "metric": "spo2", "severity": "warning" }
+    ]
+  },
+  {
+    "id": "trend_heart_rate_rising_5",
+    "rule_id": "trend_heart_rate_rising",
+    "description": "Heart rate 5 strictly increasing consecutive readings → caution trend alert",
+    "input": {
+      "metric": "heart_rate",
+      "value": 95,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [75, 80, 85, 90, 95]
+    },
+    "expected_alerts": [
+      { "rule_type": "trend", "metric": "heart_rate", "severity": "caution" }
+    ]
+  },
+  {
+    "id": "trend_heart_rate_not_monotone",
+    "rule_id": "trend_heart_rate_rising",
+    "description": "Heart rate 5 readings with one dip (not strictly monotone rising) → no trend alert",
+    "input": {
+      "metric": "heart_rate",
+      "value": 95,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [75, 85, 80, 90, 95]
+    },
+    "expected_alerts": []
+  },
+  {
+    "id": "trend_glucose_rising_5",
+    "rule_id": "trend_glucose_rising",
+    "description": "Glucose 5 strictly increasing consecutive readings → caution trend alert",
+    "input": {
+      "metric": "glucose",
+      "value": 150,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [110, 120, 130, 140, 150]
+    },
+    "expected_alerts": [
+      { "rule_type": "trend", "metric": "glucose", "severity": "caution" }
+    ]
+  },
+  {
+    "id": "trend_spo2_falling_5",
+    "rule_id": "trend_spo2_falling",
+    "description": "SpO2 5 strictly decreasing consecutive readings → caution trend alert",
+    "input": {
+      "metric": "spo2",
+      "value": 94,
+      "baseline_mean": null,
+      "baseline_std_dev": null,
+      "recent_readings": [99, 98, 97, 96, 94]
+    },
+    "expected_alerts": [
+      { "rule_type": "trend", "metric": "spo2", "severity": "caution" }
+    ]
+  }
+]
