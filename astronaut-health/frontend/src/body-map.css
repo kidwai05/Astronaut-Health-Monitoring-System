@@ -622,7 +622,7 @@
 
 @media (max-width: 900px) {
   .body-map-layout {
-    grid-template-columns: minmax(310px, 0.9fr) minmax(330px, 1.1fr);
+    grid-template-columns: minmax(0, 1fr);
   }
   .body-canvas {
     min-height: 640px;

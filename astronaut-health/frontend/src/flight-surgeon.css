@@ -1,0 +1,1077 @@
+.flight-surgeon-screen {
+  max-width: 1600px;
+  margin-right: auto;
+  padding-right: 24px;
+  padding-left: 24px;
+}
+
+.surgeon-page-heading {
+  display: flex;
+  max-width: 1500px;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 0 auto 15px;
+}
+
+.surgeon-page-heading h1 {
+  margin: 6px 0;
+  font-size: clamp(24px, 2.5vw, 32px);
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+
+.surgeon-page-heading p:not(.eyebrow) {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.surgeon-role-chip,
+.delay-banner-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-secondary);
+  font-size: 9px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.surgeon-role-chip svg {
+  color: var(--accent-primary);
+}
+
+.communication-delay-banner {
+  display: flex;
+  max-width: 1500px;
+  min-height: 53px;
+  align-items: center;
+  gap: 11px;
+  margin: 0 auto 13px;
+  padding: 9px 14px;
+  border: 1px solid color-mix(in srgb, var(--status-caution) 36%, var(--border));
+  border-radius: 13px;
+  background: linear-gradient(100deg, color-mix(in srgb, var(--status-caution) 10%, var(--surface)), var(--surface));
+  opacity: 0;
+  animation: card-reveal 420ms ease-out var(--reveal-delay, 0ms) forwards;
+}
+
+.delay-banner-icon {
+  display: grid;
+  width: 33px;
+  height: 33px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--status-caution) 15%, transparent);
+  color: var(--status-caution);
+}
+
+.delay-banner-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.delay-banner-copy strong {
+  display: block;
+  font-size: 10px;
+}
+
+.delay-banner-copy strong span {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.delay-banner-copy p {
+  margin: 3px 0 0;
+  color: var(--text-secondary);
+  font-size: 8px;
+}
+
+.delay-banner-state {
+  padding: 5px 8px;
+  border-color: color-mix(in srgb, var(--status-caution) 24%, var(--border));
+  color: var(--status-caution);
+  font-size: 8px;
+  letter-spacing: 0.04em;
+}
+
+.delay-banner-state i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--status-caution);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--status-caution) 50%, transparent);
+}
+
+.surgeon-dashboard-grid {
+  display: grid;
+  max-width: 1500px;
+  grid-template-columns: minmax(205px, 0.76fr) minmax(400px, 1.58fr) minmax(270px, 0.98fr);
+  align-items: stretch;
+  gap: 12px;
+  margin: 0 auto;
+}
+
+.surgeon-crew-panel,
+.surgeon-alerts-panel,
+.surgeon-note-panel {
+  min-width: 0;
+  padding: 14px;
+}
+
+.surgeon-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+}
+
+.surgeon-panel-heading .panel-kicker {
+  margin-bottom: 4px;
+  font-size: 8px;
+}
+
+.surgeon-panel-heading h2 {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+}
+
+.surgeon-crew-count,
+.surgeon-alert-count {
+  display: grid;
+  min-width: 25px;
+  height: 25px;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--surface-raised);
+  color: var(--text-secondary);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.surgeon-crew-list {
+  display: grid;
+  gap: 4px;
+  margin-top: 12px;
+}
+
+.surgeon-crew-row {
+  display: grid;
+  min-width: 0;
+  min-height: 69px;
+  grid-template-columns: 36px minmax(0, 1fr) 15px;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 8px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text-primary);
+  text-align: left;
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+.surgeon-crew-row:hover {
+  background: var(--surface-raised);
+}
+
+.surgeon-crew-row.selected {
+  border-color: color-mix(in srgb, var(--accent-primary) 32%, var(--border));
+  background: color-mix(in srgb, var(--accent-primary) 9%, var(--surface));
+}
+
+.surgeon-crew-avatar,
+.selected-astronaut-avatar {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.surgeon-crew-avatar {
+  width: 36px;
+  height: 36px;
+  font-size: 10px;
+}
+
+.surgeon-crew-avatar.stable,
+.selected-astronaut-avatar.stable {
+  border-color: color-mix(in srgb, var(--status-normal) 34%, var(--border));
+}
+
+.surgeon-crew-avatar.watch,
+.selected-astronaut-avatar.watch {
+  border-color: color-mix(in srgb, var(--status-caution) 48%, var(--border));
+  background: color-mix(in srgb, var(--status-caution) 8%, var(--surface-raised));
+}
+
+.surgeon-crew-avatar.review,
+.selected-astronaut-avatar.review {
+  border-color: color-mix(in srgb, var(--status-warning) 45%, var(--border));
+  background: color-mix(in srgb, var(--status-warning) 7%, var(--surface-raised));
+}
+
+.surgeon-crew-copy {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
+.surgeon-crew-copy > strong {
+  overflow: hidden;
+  font-size: 10px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.surgeon-crew-copy > small {
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.crew-status-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-secondary);
+  font-size: 8px;
+}
+
+.crew-status-label i,
+.crew-status-dot {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--status-normal);
+}
+
+.crew-status-label.watch,
+.surgeon-overall-status.watch {
+  color: var(--status-caution);
+}
+
+.crew-status-label.watch i,
+.crew-status-dot.watch {
+  background: var(--status-caution);
+}
+
+.crew-status-label.review,
+.surgeon-overall-status.review {
+  color: var(--status-warning);
+}
+
+.crew-status-label.review i,
+.crew-status-dot.review {
+  background: var(--status-warning);
+}
+
+.crew-status-dot.stable {
+  background: var(--status-normal);
+}
+
+.crew-row-chevron {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.crew-panel-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  margin-top: 11px;
+  padding-top: 11px;
+  border-top: 1px solid var(--border);
+}
+
+.crew-panel-footer > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-secondary);
+  font-size: 7px;
+  white-space: nowrap;
+}
+
+.surgeon-trends-column,
+.surgeon-right-column {
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  gap: 10px;
+}
+
+.selected-astronaut-card {
+  display: flex;
+  min-height: 62px;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+}
+
+.selected-astronaut-avatar {
+  width: 41px;
+  height: 41px;
+  font-size: 12px;
+}
+
+.selected-astronaut-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.selected-astronaut-copy .panel-kicker {
+  margin-bottom: 3px;
+  font-size: 7px;
+}
+
+.selected-astronaut-copy h2 {
+  overflow: hidden;
+  margin: 0;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selected-astronaut-copy p {
+  overflow: hidden;
+  margin: 3px 0 0;
+  color: var(--text-secondary);
+  font-size: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selected-astronaut-copy p span {
+  padding-inline: 3px;
+}
+
+.surgeon-overall-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--status-normal);
+  font-size: 8px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.surgeon-overall-status i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.surgeon-vital-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.surgeon-vital-card {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: 23px minmax(0, 1fr);
+  align-items: center;
+  gap: 4px 7px;
+  padding: 9px;
+}
+
+.surgeon-vital-icon {
+  display: grid;
+  width: 23px;
+  height: 23px;
+  grid-row: span 2;
+  place-items: center;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  color: var(--accent-primary);
+}
+
+.surgeon-vital-card.caution .surgeon-vital-icon {
+  background: color-mix(in srgb, var(--status-caution) 12%, transparent);
+  color: var(--status-caution);
+}
+
+.surgeon-vital-label {
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: 7px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.surgeon-vital-card > strong {
+  overflow: hidden;
+  font-size: 13px;
+  letter-spacing: -0.02em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.surgeon-vital-card > small {
+  overflow: hidden;
+  grid-column: 1 / -1;
+  color: var(--text-secondary);
+  font-size: 7px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.surgeon-trend-card {
+  min-width: 0;
+  padding: 11px 12px 8px;
+}
+
+.surgeon-trend-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.surgeon-trend-header h3 {
+  margin: 0;
+  font-size: 10px;
+}
+
+.surgeon-trend-header > div:first-child > span {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-secondary);
+  font-size: 7px;
+}
+
+.surgeon-chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-secondary);
+  font-size: 7px;
+  white-space: nowrap;
+}
+
+.surgeon-chart-legend i {
+  width: 6px;
+  height: 6px;
+  margin-left: 4px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+}
+
+.surgeon-chart-legend .baseline-key {
+  width: 9px;
+  height: 6px;
+  border: 1px solid color-mix(in srgb, var(--status-normal) 45%, var(--border));
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--status-normal) 13%, transparent);
+}
+
+.surgeon-chart-plot {
+  position: relative;
+  height: 98px;
+  margin-top: 4px;
+  padding-left: 28px;
+}
+
+.surgeon-chart-scale {
+  position: absolute;
+  top: 7px;
+  bottom: 8px;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--text-secondary);
+  font-size: 7px;
+}
+
+.surgeon-chart-plot svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.surgeon-baseline-band {
+  fill: color-mix(in srgb, var(--status-normal) 11%, transparent);
+  stroke: color-mix(in srgb, var(--status-normal) 25%, transparent);
+  stroke-width: 0.6;
+}
+
+.surgeon-chart-gridline {
+  stroke: var(--chart-grid);
+  stroke-width: 0.8;
+}
+
+.surgeon-chart-area {
+  fill: color-mix(in srgb, var(--accent-primary) 9%, transparent);
+  opacity: 0;
+  animation: surgeon-area-in 550ms ease-out 200ms forwards;
+}
+
+.surgeon-chart-line {
+  fill: none;
+  stroke: var(--accent-primary);
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  animation: surgeon-chart-draw 900ms cubic-bezier(0.2, 0.75, 0.25, 1) 100ms forwards;
+}
+
+.surgeon-chart-line.caution {
+  stroke: var(--status-caution);
+}
+
+.surgeon-chart-point {
+  cursor: pointer;
+  fill: var(--surface);
+  stroke: var(--accent-primary);
+  stroke-width: 1.7;
+  animation: surgeon-point-in 350ms ease-out calc(450ms + var(--point-delay, 0ms)) both;
+}
+
+.surgeon-chart-point.outside {
+  fill: var(--status-caution);
+  stroke: var(--status-caution);
+}
+
+.surgeon-chart-point.selected {
+  stroke-width: 2.7;
+}
+
+.surgeon-chart-point:focus-visible {
+  outline: none;
+  stroke: var(--text-primary);
+  stroke-width: 3.5;
+}
+
+.surgeon-chart-selected {
+  stroke: var(--accent-primary);
+  stroke-dasharray: 2 3;
+  stroke-width: 0.8;
+  opacity: 0.45;
+}
+
+.surgeon-chart-xlabels {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  color: var(--text-secondary);
+  font-size: 7px;
+}
+
+.surgeon-chart-xlabels > span:last-child {
+  text-align: right;
+}
+
+.surgeon-chart-xlabels strong {
+  color: var(--text-primary);
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.surgeon-alerts-panel {
+  padding-bottom: 10px;
+}
+
+.surgeon-alert-count {
+  background: color-mix(in srgb, var(--status-warning) 14%, transparent);
+  color: var(--status-warning);
+}
+
+.surgeon-alert-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 11px;
+}
+
+.surgeon-alert-card {
+  display: grid;
+  grid-template-columns: 25px minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+  padding: 9px;
+  border: 1px solid color-mix(in srgb, var(--status-caution) 25%, var(--border));
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--status-caution) 4%, var(--surface));
+  opacity: 0;
+  animation: card-reveal 380ms ease-out var(--reveal-delay, 0ms) forwards;
+}
+
+.surgeon-alert-card.warning {
+  border-color: color-mix(in srgb, var(--status-warning) 30%, var(--border));
+  background: color-mix(in srgb, var(--status-warning) 4%, var(--surface));
+}
+
+.surgeon-alert-icon {
+  display: grid;
+  width: 25px;
+  height: 25px;
+  place-items: center;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--status-caution) 13%, transparent);
+  color: var(--status-caution);
+}
+
+.surgeon-alert-card.warning .surgeon-alert-icon {
+  background: color-mix(in srgb, var(--status-warning) 14%, transparent);
+  color: var(--status-warning);
+}
+
+.surgeon-alert-copy {
+  min-width: 0;
+}
+
+.surgeon-alert-topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.surgeon-alert-topline > span {
+  color: var(--status-caution);
+  font-size: 7px;
+  font-weight: 750;
+  letter-spacing: 0.07em;
+}
+
+.surgeon-alert-card.warning .surgeon-alert-topline > span {
+  color: var(--status-warning);
+}
+
+.surgeon-alert-topline time {
+  color: var(--text-secondary);
+  font-size: 7px;
+  white-space: nowrap;
+}
+
+.surgeon-alert-copy h3 {
+  margin: 4px 0;
+  font-size: 9px;
+  line-height: 1.35;
+}
+
+.surgeon-alert-copy p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 8px;
+  line-height: 1.4;
+}
+
+.surgeon-alert-copy button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 7px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent-primary);
+  font-size: 8px;
+  font-weight: 650;
+}
+
+.surgeon-alert-empty {
+  display: grid;
+  min-height: 100px;
+  justify-items: center;
+  align-content: center;
+  gap: 6px;
+  color: var(--status-normal);
+  text-align: center;
+}
+
+.surgeon-alert-empty strong {
+  color: var(--text-primary);
+  font-size: 10px;
+}
+
+.surgeon-alert-empty span {
+  color: var(--text-secondary);
+  font-size: 8px;
+}
+
+.surgeon-queue-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 9px;
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent-primary);
+  font-size: 8px;
+  font-weight: 650;
+}
+
+.surgeon-note-panel .surgeon-panel-heading {
+  align-items: flex-start;
+}
+
+.surgeon-note-icon {
+  display: grid;
+  width: 29px;
+  height: 29px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  color: var(--accent-primary);
+}
+
+.surgeon-note-recipient {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 8px 0;
+  color: var(--text-secondary);
+  font-size: 8px;
+}
+
+.surgeon-note-label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text-secondary);
+  font-size: 8px;
+  font-weight: 650;
+}
+
+.surgeon-note-panel textarea {
+  display: block;
+  width: 100%;
+  min-height: 90px;
+  resize: vertical;
+  padding: 9px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--background);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.surgeon-note-panel textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.75;
+}
+
+.surgeon-note-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.surgeon-note-footer > span {
+  color: var(--text-secondary);
+  font-size: 7px;
+  line-height: 1.4;
+}
+
+.surgeon-send-button {
+  display: inline-flex;
+  min-width: 66px;
+  min-height: 31px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--accent-primary);
+  color: var(--accent-on);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.surgeon-send-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.surgeon-note-success {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 9px 0 0;
+  color: var(--status-normal);
+  font-size: 8px;
+}
+
+.surgeon-privacy-footnote {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 1px 3px;
+  color: var(--text-secondary);
+  font-size: 8px;
+}
+
+.surgeon-privacy-footnote svg {
+  color: var(--accent-primary);
+}
+
+.surgeon-sk-eyebrow,
+.surgeon-sk-title,
+.surgeon-sk-copy,
+.surgeon-sk-sync,
+.surgeon-sk-crew,
+.surgeon-sk-trends,
+.surgeon-sk-alerts {
+  background: var(--skeleton-low);
+}
+
+.surgeon-sk-eyebrow {
+  width: 170px;
+  height: 10px;
+  margin-bottom: 10px;
+}
+
+.surgeon-sk-title {
+  width: min(390px, 68vw);
+  height: 32px;
+  margin-bottom: 9px;
+}
+
+.surgeon-sk-copy {
+  width: min(440px, 68vw);
+  height: 13px;
+}
+
+.surgeon-sk-sync {
+  max-width: 1500px;
+  height: 53px;
+  margin: 0 auto 13px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+}
+
+.surgeon-sk-crew,
+.surgeon-sk-trends,
+.surgeon-sk-alerts {
+  min-height: 530px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+@keyframes surgeon-chart-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes surgeon-area-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes surgeon-point-in {
+  from {
+    opacity: 0;
+    transform: scale(0.25);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 1180px) {
+  .surgeon-dashboard-grid {
+    grid-template-columns: minmax(190px, 0.66fr) minmax(0, 1.6fr);
+  }
+
+  .surgeon-right-column {
+    grid-column: 2;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .surgeon-privacy-footnote {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 900px) {
+  .flight-surgeon-screen {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .surgeon-dashboard-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .surgeon-right-column {
+    grid-column: auto;
+  }
+
+  .surgeon-crew-panel {
+    order: 0;
+  }
+
+  .surgeon-trends-column {
+    order: 1;
+  }
+
+  .surgeon-right-column {
+    order: 2;
+  }
+
+  .surgeon-crew-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .flight-surgeon-screen {
+    padding: 96px 16px 125px;
+  }
+
+  .surgeon-page-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .surgeon-page-heading h1 {
+    font-size: 25px;
+  }
+
+  .surgeon-page-heading p:not(.eyebrow) {
+    max-width: 320px;
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+  .communication-delay-banner {
+    align-items: flex-start;
+    padding: 9px;
+  }
+
+  .delay-banner-copy strong {
+    font-size: 9px;
+    line-height: 1.4;
+  }
+
+  .delay-banner-copy strong span {
+    display: block;
+  }
+
+  .delay-banner-copy p {
+    line-height: 1.4;
+  }
+
+  .delay-banner-state {
+    padding: 5px;
+    font-size: 6px;
+  }
+
+  .surgeon-dashboard-grid {
+    gap: 10px;
+  }
+
+  .surgeon-crew-panel,
+  .surgeon-alerts-panel,
+  .surgeon-note-panel {
+    padding: 12px;
+  }
+
+  .surgeon-crew-list {
+    grid-template-columns: 1fr;
+  }
+
+  .surgeon-crew-row {
+    min-height: 62px;
+  }
+
+  .surgeon-crew-copy > strong {
+    font-size: 11px;
+  }
+
+  .crew-panel-footer > span {
+    font-size: 8px;
+  }
+
+  .selected-astronaut-card {
+    flex-wrap: wrap;
+  }
+
+  .surgeon-overall-status {
+    margin-left: 51px;
+  }
+
+  .surgeon-vital-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .surgeon-vital-card {
+    grid-template-columns: 26px minmax(0, 1fr) auto;
+  }
+
+  .surgeon-vital-icon {
+    grid-row: span 2;
+  }
+
+  .surgeon-vital-card > strong {
+    grid-row: 1 / span 2;
+    grid-column: 3;
+  }
+
+  .surgeon-vital-card > small {
+    grid-column: 2;
+  }
+
+  .surgeon-trend-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .surgeon-chart-plot {
+    height: 110px;
+  }
+
+  .surgeon-right-column {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .surgeon-chart-line,
+  .surgeon-chart-point,
+  .surgeon-chart-area {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+  }
+
+  .surgeon-chart-line {
+    stroke-dashoffset: 0;
+  }
+
+  .surgeon-chart-area {
+    opacity: 1;
+  }
+}

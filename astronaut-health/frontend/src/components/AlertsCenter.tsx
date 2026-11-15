@@ -72,7 +72,13 @@ const severityConfig = {
   info: { label: "Info", icon: CircleAlert },
 };
 
-export function AlertsCenter({ onNotify }: { onNotify: (message: string) => void }) {
+export function AlertsCenter({
+  onNotify,
+  onNavigateToGuidance,
+}: {
+  onNotify: (message: string) => void;
+  onNavigateToGuidance: (topic: string) => void;
+}) {
   const [loading, setLoading] = useState(true);
   const [alerts, setAlerts] = useState(initialAlerts);
   const [tab, setTab] = useState<AlertStatus>("open");
@@ -275,7 +281,15 @@ export function AlertsCenter({ onNotify }: { onNotify: (message: string) => void
             delay={280 + index * 60}
             onAcknowledge={() => updateStatus(alert.id, "acknowledged")}
             onResolve={() => updateStatus(alert.id, "resolved")}
-            onGuidance={() => onNotify(`${alert.metric} guidance opened`)}
+            onGuidance={() =>
+              onNavigateToGuidance(
+                alert.metric.toLowerCase().includes("sleep")
+                  ? "Sleep"
+                  : alert.metric.toLowerCase().includes("hydration")
+                    ? "Hydration"
+                    : "Heart",
+              )
+            }
           />
         ))}
         {filtered.length === 0 && (

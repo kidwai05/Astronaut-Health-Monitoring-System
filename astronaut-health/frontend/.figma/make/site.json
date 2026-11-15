@@ -1,4 +1,5 @@
 {
+  "title": "VITALIS",
   "description": "Offline-first health monitoring helps astronauts track vital signs, sleep, and mood, review trends, and access decision-support guidance during long-duration missions.",
   "robots": {
     "index": false

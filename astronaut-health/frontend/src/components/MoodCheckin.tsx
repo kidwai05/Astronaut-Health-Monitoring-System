@@ -11,6 +11,7 @@ import {
   Sparkles,
   Zap,
 } from "lucide-react";
+import { useManagedTimeout } from "./VitalisUI";
 
 const moods = [
   { face: "😞", label: "Very low" },
@@ -22,7 +23,14 @@ const moods = [
 const tags = ["Isolated", "Tired", "Motivated", "Anxious", "Crew conflict", "High workload"];
 const trend = [3, 4, 4, 3, 4, 5, 4, 4, 3, 3, 4, 4, 3, 4];
 
-export function MoodCheckin({ onNotify }: { onNotify: (message: string) => void }) {
+export function MoodCheckin({
+  onNotify,
+  onNavigateToGuidance,
+}: {
+  onNotify: (message: string) => void;
+  onNavigateToGuidance: (topic: string) => void;
+}) {
+  const scheduleTimeout = useManagedTimeout();
   const [loading, setLoading] = useState(true);
   const [mood, setMood] = useState(4);
   const [stress, setStress] = useState(4);
@@ -35,9 +43,8 @@ export function MoodCheckin({ onNotify }: { onNotify: (message: string) => void 
 
   useEffect(() => {
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const timer = setTimeout(() => setLoading(false), reduced ? 250 : 1000);
-    return () => clearTimeout(timer);
-  }, []);
+    scheduleTimeout(() => setLoading(false), reduced ? 250 : 1000);
+  }, [scheduleTimeout]);
 
   const progress = useMemo(() => Object.values(touched).filter(Boolean).length * 25, [touched]);
   const toggleTag = (tag: string) => {
@@ -49,8 +56,8 @@ export function MoodCheckin({ onNotify }: { onNotify: (message: string) => void 
   const save = () => {
     if (saveState !== "idle") return;
     setSaveState("saving");
-    setTimeout(() => setSaveState("saved"), 450);
-    setTimeout(() => {
+    scheduleTimeout(() => setSaveState("saved"), 450);
+    scheduleTimeout(() => {
       setSaveState("idle");
       onNotify("Private wellbeing check-in saved locally");
     }, 1300);
@@ -358,7 +365,7 @@ export function MoodCheckin({ onNotify }: { onNotify: (message: string) => void 
             A private conversation with the behavioural health team is always available, even if you
             simply want to talk.
           </p>
-          <button onClick={() => onNotify("Private support options opened")}>
+          <button onClick={() => onNavigateToGuidance("Stress")}>
             <MessageCircleHeart size={20} /> I'd like to talk to someone <ChevronRight size={18} />
           </button>
           <small>This does not trigger an emergency alert.</small>

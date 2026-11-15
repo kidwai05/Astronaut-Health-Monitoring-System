@@ -11,7 +11,7 @@ import {
   Star,
   Sunrise,
 } from "lucide-react";
-import { StatusChip } from "./VitalisUI";
+import { StatusChip, useManagedTimeout } from "./VitalisUI";
 
 const nights = [
   { day: "MON", hours: 7.8, quality: 4 },
@@ -23,7 +23,14 @@ const nights = [
   { day: "SUN", hours: 6.67, quality: 3 },
 ];
 
-export function SleepTracker({ onNotify }: { onNotify: (message: string) => void }) {
+export function SleepTracker({
+  onNotify,
+  onNavigateToGuidance,
+}: {
+  onNotify: (message: string) => void;
+  onNavigateToGuidance: (topic: string) => void;
+}) {
+  const scheduleTimeout = useManagedTimeout();
   const [loading, setLoading] = useState(true);
   const [quality, setQuality] = useState(3);
   const [bedtime, setBedtime] = useState("22:40");
@@ -34,15 +41,14 @@ export function SleepTracker({ onNotify }: { onNotify: (message: string) => void
 
   useEffect(() => {
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const timer = setTimeout(() => setLoading(false), reduced ? 250 : 1000);
-    return () => clearTimeout(timer);
-  }, []);
+    scheduleTimeout(() => setLoading(false), reduced ? 250 : 1000);
+  }, [scheduleTimeout]);
 
   const save = () => {
     if (saveState !== "idle") return;
     setSaveState("saving");
-    setTimeout(() => setSaveState("saved"), 450);
-    setTimeout(() => {
+    scheduleTimeout(() => setSaveState("saved"), 450);
+    scheduleTimeout(() => {
       setSaveState("idle");
       onNotify("Sleep log saved locally");
     }, 1250);
@@ -350,7 +356,7 @@ export function SleepTracker({ onNotify }: { onNotify: (message: string) => void
             <li>Set cabin temperature to 19–21°C</li>
             <li>Avoid caffeine within 6 hours</li>
           </ul>
-          <button onClick={() => onNotify("Habitat sleep guidance opened")}>
+          <button onClick={() => onNavigateToGuidance("Sleep")}>
             View sleep hygiene guide
           </button>
         </article>

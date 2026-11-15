@@ -64,9 +64,15 @@ const series: Record<string, number[]> = {
   mood: [4, 4, 5, 4, 4, 4, 3, 4, 4, 3, 3, 4, 3, 4],
 };
 
-export function TrendsCharts({ onNotify }: { onNotify: (message: string) => void }) {
+export function TrendsCharts({
+  initialMetric = "heart",
+  onNavigateToGuidance,
+}: {
+  initialMetric?: string;
+  onNavigateToGuidance: (topic: string) => void;
+}) {
   const [loading, setLoading] = useState(true);
-  const [metric, setMetric] = useState("heart");
+  const [metric, setMetric] = useState(initialMetric);
   const [range, setRange] = useState<RangeKey>("14d");
   const [overlay, setOverlay] = useState<Overlay>("none");
   const [selected, setSelected] = useState(13);
@@ -206,7 +212,7 @@ export function TrendsCharts({ onNotify }: { onNotify: (message: string) => void
                 : `${config.label} remains close to your personal baseline.`}
             </strong>
           </div>
-          <button onClick={() => onNotify(`${config.label} guidance opened`)}>
+          <button onClick={() => onNavigateToGuidance(metric === "sleep" ? "Sleep" : metric === "mood" ? "Stress" : "Heart")}>
             See guidance <ChevronDown size={17} />
           </button>
         </div>
@@ -283,7 +289,7 @@ function PrimaryTrendChart({
   const x = (index: number) => (index / (values.length - 1)) * 800;
   const y = (value: number) => 250 - ((value - min) / (max - min)) * 220;
   const points = values.map((value, index) => `${x(index)},${y(value)}`).join(" ");
-  const area = `M${points.replaceAll(" ", " L")} L800,270 L0,270 Z`;
+  const area = `M${points.replace(/ /g, " L")} L800,270 L0,270 Z`;
   const overlayValues = values.map((_, index) =>
     overlay === "sleep"
       ? 175 + Math.sin(index * 0.7) * 32 + index * 2.5
