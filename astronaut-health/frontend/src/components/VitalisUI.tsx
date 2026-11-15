@@ -1,9 +1,11 @@
 import {
+  useCallback,
   useEffect,
   useRef,
   useState,
   type ComponentType,
   type CSSProperties,
+  type RefObject,
   type ReactNode,
 } from "react";
 import {
@@ -21,6 +23,80 @@ import {
 
 export type StatusTone = "normal" | "caution" | "warning" | "critical";
 export type ThemeMode = "dark" | "light";
+export type ThemePreference = ThemeMode | "auto";
+
+export function useManagedTimeout() {
+  const timeoutIds = useRef<number[]>([]);
+  useEffect(
+    () => () => {
+      timeoutIds.current.forEach((timeoutId) => window.clearTimeout(timeoutId));
+    },
+    [],
+  );
+
+  return useCallback((callback: () => void, delay: number) => {
+    let timeoutId = 0;
+    timeoutId = window.setTimeout(() => {
+      timeoutIds.current = timeoutIds.current.filter((id) => id !== timeoutId);
+      callback();
+    }, delay);
+    timeoutIds.current.push(timeoutId);
+  }, []);
+}
+
+export function useModalFocus(
+  dialogRef: RefObject<HTMLElement | null>,
+  active: boolean,
+  onEscape?: () => void,
+) {
+  const onEscapeRef = useRef(onEscape);
+
+  useEffect(() => {
+    onEscapeRef.current = onEscape;
+  }, [onEscape]);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!active || !dialog) return;
+    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const getFocusable = () =>
+      Array.from(
+        dialog.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      );
+    getFocusable()[0]?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && onEscapeRef.current) {
+        onEscapeRef.current();
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusable = getFocusable();
+      if (focusable.length === 0) {
+        event.preventDefault();
+        dialog.focus();
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      previousFocus?.focus();
+    };
+  }, [active, dialogRef]);
+}
 
 const statusIcons = {
   normal: Check,
@@ -141,6 +217,7 @@ export function MetricTile({
   data,
   live = false,
   delay = 0,
+  onClick,
 }: {
   label: string;
   value: string;
@@ -152,11 +229,14 @@ export function MetricTile({
   data: number[];
   live?: boolean;
   delay?: number;
+  onClick: () => void;
 }) {
   return (
-    <article
+    <button
+      type="button"
       className={`metric-tile reveal-card ${tone} ${live ? "live-tile" : ""}`}
       style={{ "--reveal-delay": `${delay}ms` } as CSSProperties}
+      onClick={onClick}
     >
       <div className="metric-top">
         <span className={`metric-icon ${live ? "heart-beat" : ""}`}>
@@ -171,7 +251,7 @@ export function MetricTile({
       </div>
       <Sparkline data={data} tone={tone} live={live} />
       <p className="metric-detail">{detail}</p>
-    </article>
+    </button>
   );
 }
 

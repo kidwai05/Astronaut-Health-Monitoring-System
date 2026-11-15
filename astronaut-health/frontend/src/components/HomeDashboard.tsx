@@ -20,6 +20,7 @@ import { MetricTile, ReminderItem, type StatusTone } from "./VitalisUI";
 const homeMetrics = [
   {
     label: "Heart Rate",
+    trendKey: "heart",
     value: "72",
     unit: "bpm",
     detail: "7-day trend · Live",
@@ -31,6 +32,7 @@ const homeMetrics = [
   },
   {
     label: "Blood Pressure",
+    trendKey: "pressure",
     value: "118/76",
     unit: "mmHg",
     detail: "7-day average · 117/75",
@@ -41,6 +43,7 @@ const homeMetrics = [
   },
   {
     label: "Glucose",
+    trendKey: "glucose",
     value: "92",
     unit: "mg/dL",
     detail: "7-day fasting trend",
@@ -51,6 +54,7 @@ const homeMetrics = [
   },
   {
     label: "Temperature",
+    trendKey: "temperature",
     value: "36.7",
     unit: "°C",
     detail: "7-day stable range",
@@ -61,6 +65,7 @@ const homeMetrics = [
   },
   {
     label: "Sleep (last night)",
+    trendKey: "sleep",
     value: "6",
     unit: "h 40m",
     detail: "7-day trend · −48m",
@@ -71,6 +76,7 @@ const homeMetrics = [
   },
   {
     label: "Mood",
+    trendKey: "mood",
     value: "4",
     unit: "/5",
     detail: "7-day self-report trend",
@@ -81,25 +87,21 @@ const homeMetrics = [
   },
 ];
 
-export function HomeDashboard({ onNotify }: { onNotify: (message: string) => void }) {
+export function HomeDashboard({
+  onNotify,
+  onNavigate,
+  onMetricSelect,
+}: {
+  onNotify: (message: string) => void;
+  onNavigate: (screen: string) => void;
+  onMetricSelect: (metric: string) => void;
+}) {
   const [reminders, setReminders] = useState({
     hydration: true,
     exercise: true,
     glucose: false,
     evening: false,
   });
-  const [logState, setLogState] = useState<"idle" | "saving" | "saved">("idle");
-
-  const logNow = () => {
-    if (logState !== "idle") return;
-    setLogState("saving");
-    window.setTimeout(() => setLogState("saved"), 450);
-    window.setTimeout(() => {
-      onNotify("New health reading saved locally");
-      setLogState("idle");
-    }, 1250);
-  };
-
   const completedCount = Object.values(reminders).filter(Boolean).length;
 
   return (
@@ -124,7 +126,7 @@ export function HomeDashboard({ onNotify }: { onNotify: (message: string) => voi
           <h2>All good. 2 items need attention</h2>
           <p>Sleep recovery and resting heart rate are outside your personal baseline.</p>
         </div>
-        <button className="text-button" onClick={() => onNotify("Opening 2 attention items")}>
+        <button className="text-button" onClick={() => onNavigate("Alerts")}>
           Review <ChevronRight size={19} />
         </button>
       </section>
@@ -146,7 +148,20 @@ export function HomeDashboard({ onNotify }: { onNotify: (message: string) => voi
           </div>
           <div className="metric-grid home-metric-grid" aria-label="Latest health metrics">
             {homeMetrics.map((metric, index) => (
-              <MetricTile key={metric.label} {...metric} delay={150 + index * 60} />
+              <MetricTile
+                key={metric.label}
+                label={metric.label}
+                value={metric.value}
+                unit={metric.unit}
+                detail={metric.detail}
+                icon={metric.icon}
+                tone={metric.tone}
+                status={metric.status}
+                data={metric.data}
+                live={metric.live}
+                delay={150 + index * 60}
+                onClick={() => onMetricSelect(metric.trendKey)}
+              />
             ))}
           </div>
         </div>
@@ -155,7 +170,7 @@ export function HomeDashboard({ onNotify }: { onNotify: (message: string) => voi
           <button
             className="open-alerts-strip reveal-card"
             style={{ "--reveal-delay": "240ms" } as CSSProperties}
-            onClick={() => onNotify("Opening 2 active alerts")}
+            onClick={() => onNavigate("Alerts")}
           >
             <span className="alerts-icon">
               <TriangleAlert size={21} />
@@ -176,7 +191,12 @@ export function HomeDashboard({ onNotify }: { onNotify: (message: string) => voi
                 <span className="panel-kicker">TODAY</span>
                 <h2>Today's Reminders</h2>
               </div>
-              <span className="count-badge">{completedCount} of 4</span>
+              <div>
+                <span className="count-badge">{completedCount} of 4</span>
+                <button className="text-button" onClick={() => onNavigate("Reminders")}>
+                  Manage <ChevronRight size={16} />
+                </button>
+              </div>
             </div>
             <div className="reminder-list">
               <ReminderItem
@@ -216,7 +236,7 @@ export function HomeDashboard({ onNotify }: { onNotify: (message: string) => voi
             <button
               className="streak-card reveal-card"
               style={{ "--reveal-delay": "540ms" } as CSSProperties}
-              onClick={() => onNotify("12-day health logging streak")}
+              onClick={() => onNavigate("Progress")}
             >
               <Flame size={24} />
               <span>
@@ -227,7 +247,7 @@ export function HomeDashboard({ onNotify }: { onNotify: (message: string) => voi
             <button
               className="radiation-card reveal-card"
               style={{ "--reveal-delay": "600ms" } as CSSProperties}
-              onClick={() => onNotify("Radiation exposure is within today's safe range")}
+              onClick={() => onNavigate("Environment")}
             >
               <Sun size={24} />
               <span>
@@ -246,13 +266,11 @@ export function HomeDashboard({ onNotify }: { onNotify: (message: string) => voi
         Decision support only. Not a medical diagnosis.
       </div>
 
-      <button className={`floating-log-button ${logState}`} onClick={logNow}>
+      <button className="floating-log-button" onClick={() => onNavigate("Log")}>
         <span className="log-button-icon">
-          {logState === "saved" ? <Check size={23} /> : <Plus size={23} />}
+          <Plus size={23} />
         </span>
-        <span>
-          {logState === "saving" ? "Saving..." : logState === "saved" ? "Saved" : "Log now"}
-        </span>
+        <span>Log now</span>
         <i className="log-ripple" />
       </button>
     </main>

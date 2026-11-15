@@ -1,4 +1,4 @@
-import { useEffect, useState, type CSSProperties, type FormEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from "react";
 import {
   BellRing,
   Check,
@@ -12,6 +12,7 @@ import {
   Smile,
   X,
 } from "lucide-react";
+import { useModalFocus } from "../components/VitalisUI";
 
 type Reminder = {
   id: number;
@@ -50,6 +51,7 @@ export function RemindersPage({ onNotify }: { onNotify: (message: string) => voi
   const [loading, setLoading] = useState(true);
   const [reminders, setReminders] = useState(initialReminders);
   const [addOpen, setAddOpen] = useState(false);
+  const modalRef = useRef<HTMLElement>(null);
   const [newTitle, setNewTitle] = useState("");
   const [newTime, setNewTime] = useState("12:00");
 
@@ -58,6 +60,7 @@ export function RemindersPage({ onNotify }: { onNotify: (message: string) => voi
     const timer = window.setTimeout(() => setLoading(false), reduced ? 250 : 850);
     return () => window.clearTimeout(timer);
   }, []);
+  useModalFocus(modalRef, addOpen, () => setAddOpen(false));
 
   const toggleReminder = (id: number) => {
     setReminders((items) =>
@@ -257,6 +260,7 @@ export function RemindersPage({ onNotify }: { onNotify: (message: string) => voi
           }}
         >
           <section
+            ref={modalRef}
             className="support-modal"
             role="dialog"
             aria-modal="true"

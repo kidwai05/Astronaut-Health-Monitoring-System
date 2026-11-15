@@ -11,7 +11,7 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
-import { StatusChip } from "./VitalisUI";
+import { StatusChip, useManagedTimeout } from "./VitalisUI";
 
 type Side = "front" | "back";
 const faces = ["😣", "🙁", "😐", "🙂", "😊"];
@@ -21,7 +21,14 @@ const history = [
   ["Head", "Headache", "Mission day 140", "2/5"],
 ];
 
-export function BodyMap({ onNotify }: { onNotify: (message: string) => void }) {
+export function BodyMap({
+  onNotify,
+  onNavigateToGuidance,
+}: {
+  onNotify: (message: string) => void;
+  onNavigateToGuidance: (topic: string) => void;
+}) {
+  const scheduleTimeout = useManagedTimeout();
   const [loading, setLoading] = useState(true);
   const [side, setSide] = useState<Side>("front");
   const [region, setRegion] = useState("Eyes");
@@ -33,9 +40,8 @@ export function BodyMap({ onNotify }: { onNotify: (message: string) => void }) {
 
   useEffect(() => {
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const timer = setTimeout(() => setLoading(false), reduced ? 250 : 1000);
-    return () => clearTimeout(timer);
-  }, []);
+    scheduleTimeout(() => setLoading(false), reduced ? 250 : 1000);
+  }, [scheduleTimeout]);
 
   const chooseRegion = (next: string) => {
     setRegion(next);
@@ -54,8 +60,8 @@ export function BodyMap({ onNotify }: { onNotify: (message: string) => void }) {
   const save = () => {
     if (saving !== "idle") return;
     setSaving("saving");
-    setTimeout(() => setSaving("saved"), 450);
-    setTimeout(() => {
+    scheduleTimeout(() => setSaving("saved"), 450);
+    scheduleTimeout(() => {
       setSaving("idle");
       onNotify(`${region} symptom saved locally`);
     }, 1200);
@@ -121,7 +127,11 @@ export function BodyMap({ onNotify }: { onNotify: (message: string) => void }) {
                 {region === "Eyes" ? <Eye size={21} /> : <Activity size={21} />} {region}
               </h2>
             </div>
-            <button className="close-symptom-panel" onClick={() => setPanelOpen(false)}>
+            <button
+              className="close-symptom-panel"
+              aria-label="Close symptom panel"
+              onClick={() => setPanelOpen(false)}
+            >
               <X size={20} />
             </button>
           </header>
@@ -198,7 +208,7 @@ export function BodyMap({ onNotify }: { onNotify: (message: string) => void }) {
               <div>
                 <strong>Spaceflight vision note</strong>
                 <p>Vision changes can be related to spaceflight fluid shifts.</p>
-                <button onClick={() => onNotify("Vision guidance opened")}>
+                <button onClick={() => onNavigateToGuidance("Eyes")}>
                   See guidance <ChevronRight size={17} />
                 </button>
               </div>

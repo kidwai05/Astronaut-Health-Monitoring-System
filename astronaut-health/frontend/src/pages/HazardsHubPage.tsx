@@ -75,7 +75,7 @@ const hazards: Hazard[] = [
       "Offline-first logs keep health information available locally, with decision-support cues to help organize what to review.",
     links: [
       { label: "Quick log", screen: "Log" },
-      { label: "Health records", screen: "Records" },
+      { label: "Health records", screen: "Health Records" },
       { label: "Guidance", screen: "Guidance" },
     ],
   },

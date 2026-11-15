@@ -1771,6 +1771,22 @@
   white-space: nowrap;
 }
 
+.switch-crew-button {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.switch-crew-button:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
 .settings-layout {
   grid-template-columns: minmax(0, 1.55fr) minmax(270px, 0.75fr);
   align-items: start;
@@ -1846,6 +1862,7 @@
 
 .settings-segmented {
   display: flex;
+  flex: 0 0 auto;
   gap: 3px;
   padding: 3px;
   border: 1px solid var(--border);

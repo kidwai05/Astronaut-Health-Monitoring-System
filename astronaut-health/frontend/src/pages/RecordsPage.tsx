@@ -1,4 +1,12 @@
-import { useEffect, useMemo, useState, type CSSProperties } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
+import { createPortal } from "react-dom";
 import {
   Activity,
   BedDouble,
@@ -129,12 +137,60 @@ export function RecordsPage({ onNotify }: { onNotify: (message: string) => void 
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<CategoryFilter>("All");
   const [exportOpen, setExportOpen] = useState(false);
+  const [exportMenuPosition, setExportMenuPosition] = useState({ top: 0, left: 0, width: 220 });
+  const exportTriggerRef = useRef<HTMLButtonElement>(null);
+  const exportMenuRef = useRef<HTMLDivElement>(null);
+
+  const updateExportMenuPosition = () => {
+    const trigger = exportTriggerRef.current;
+    if (!trigger) return;
+    const bounds = trigger.getBoundingClientRect();
+    const width = Math.min(220, window.innerWidth - 24);
+    const menuHeight = exportMenuRef.current?.getBoundingClientRect().height ?? 110;
+    const belowTop = bounds.bottom + 8;
+    const top =
+      belowTop + menuHeight > window.innerHeight - 12
+        ? Math.max(12, bounds.top - menuHeight - 8)
+        : belowTop;
+    setExportMenuPosition({
+      top,
+      left: Math.max(12, Math.min(bounds.right - width, window.innerWidth - width - 12)),
+      width,
+    });
+  };
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const timer = window.setTimeout(() => setLoading(false), reduced ? 250 : 900);
     return () => window.clearTimeout(timer);
   }, []);
+
+  useLayoutEffect(() => {
+    if (!exportOpen) return;
+    updateExportMenuPosition();
+    const closeOnPointerDown = (event: PointerEvent) => {
+      if (!(event.target instanceof Node)) return;
+      if (
+        !exportTriggerRef.current?.contains(event.target) &&
+        !exportMenuRef.current?.contains(event.target)
+      ) {
+        setExportOpen(false);
+      }
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setExportOpen(false);
+    };
+    window.addEventListener("resize", updateExportMenuPosition);
+    window.addEventListener("scroll", updateExportMenuPosition, true);
+    document.addEventListener("pointerdown", closeOnPointerDown);
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      window.removeEventListener("resize", updateExportMenuPosition);
+      window.removeEventListener("scroll", updateExportMenuPosition, true);
+      document.removeEventListener("pointerdown", closeOnPointerDown);
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [exportOpen]);
 
   const filteredRecords = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -196,14 +252,31 @@ export function RecordsPage({ onNotify }: { onNotify: (message: string) => void 
         </div>
         <div className="records-export-wrap">
           <button
+            ref={exportTriggerRef}
             className="primary-button support-primary-button"
             aria-expanded={exportOpen}
-            onClick={() => setExportOpen((open) => !open)}
+            aria-controls="records-export-menu"
+            onClick={() => {
+              if (!exportOpen) updateExportMenuPosition();
+              setExportOpen((open) => !open);
+            }}
           >
             <Download size={18} /> Export PDF / CSV <ChevronDown size={16} />
           </button>
-          {exportOpen && (
-            <div className="records-export-menu">
+          {exportOpen &&
+            createPortal(
+              <div
+                ref={exportMenuRef}
+                id="records-export-menu"
+                className="records-export-menu"
+                style={{
+                  position: "fixed",
+                  top: exportMenuPosition.top,
+                  left: exportMenuPosition.left,
+                  width: exportMenuPosition.width,
+                  zIndex: 1000,
+                }}
+              >
               <button onClick={exportPdf}>
                 <FileText size={17} />
                 <span>
@@ -218,8 +291,9 @@ export function RecordsPage({ onNotify }: { onNotify: (message: string) => void 
                   <small>{filteredRecords.length} filtered records</small>
                 </span>
               </button>
-            </div>
-          )}
+              </div>,
+              document.body,
+            )}
         </div>
       </section>
 

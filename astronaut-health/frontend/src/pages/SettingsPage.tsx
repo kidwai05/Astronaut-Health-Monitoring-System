@@ -12,10 +12,24 @@ import {
   Smartphone,
   UserRound,
 } from "lucide-react";
+import { useManagedTimeout, type ThemePreference } from "../components/VitalisUI";
 
 type Units = "metric" | "imperial";
 
-export function SettingsPage({ onNotify }: { onNotify: (message: string) => void }) {
+export function SettingsPage({
+  onNotify,
+  themePreference,
+  onThemeChange,
+  initialSection,
+  onSwitchCrew,
+}: {
+  onNotify: (message: string) => void;
+  themePreference: ThemePreference;
+  onThemeChange: (preference: ThemePreference) => void;
+  initialSection: "sync" | null;
+  onSwitchCrew: () => void;
+}) {
+  const scheduleTimeout = useManagedTimeout();
   const [loading, setLoading] = useState(true);
   const [units, setUnits] = useState<Units>("metric");
   const [textSize, setTextSize] = useState(16);
@@ -41,6 +55,15 @@ export function SettingsPage({ onNotify }: { onNotify: (message: string) => void
     window.localStorage.setItem("vitalis-text-size", String(textSize));
   }, [textSize]);
 
+  useEffect(() => {
+    if (!loading && initialSection === "sync") {
+      document.getElementById("sync-settings")?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [loading, initialSection]);
+
   const changeUnits = (next: Units) => {
     setUnits(next);
     window.localStorage.setItem("vitalis-units", next);
@@ -50,7 +73,7 @@ export function SettingsPage({ onNotify }: { onNotify: (message: string) => void
   const syncNow = () => {
     if (syncing) return;
     setSyncing(true);
-    window.setTimeout(() => {
+    scheduleTimeout(() => {
       setQueueSize(0);
       setSyncing(false);
       onNotify("Local health records are synchronized");
@@ -90,6 +113,9 @@ export function SettingsPage({ onNotify }: { onNotify: (message: string) => void
         <span className="profile-verified">
           <CheckCircle2 size={16} /> Verified crew member
         </span>
+        <button className="switch-crew-button" onClick={onSwitchCrew}>
+          Switch crew
+        </button>
       </section>
 
       <div className="settings-layout">
@@ -131,6 +157,24 @@ export function SettingsPage({ onNotify }: { onNotify: (message: string) => void
                 >
                   Imperial
                 </button>
+              </div>
+            </div>
+            <div className="settings-control-row">
+              <div className="settings-control-copy">
+                <strong>Theme</strong>
+                <span>Choose a fixed theme or follow your device setting.</span>
+              </div>
+              <div className="settings-segmented" role="group" aria-label="Theme">
+                {(["light", "dark", "auto"] as ThemePreference[]).map((preference) => (
+                  <button
+                    key={preference}
+                    className={themePreference === preference ? "active" : ""}
+                    aria-pressed={themePreference === preference}
+                    onClick={() => onThemeChange(preference)}
+                  >
+                    {preference === "auto" ? "Auto" : preference === "light" ? "Light" : "Dark"}
+                  </button>
+                ))}
               </div>
             </div>
             <div className="settings-control-row text-size-row">
@@ -228,6 +272,7 @@ export function SettingsPage({ onNotify }: { onNotify: (message: string) => void
         <aside className="settings-side-column">
           <section
             className="sync-settings-card panel reveal-card"
+            id="sync-settings"
             style={{ "--reveal-delay": "130ms" } as CSSProperties}
           >
             <header className="settings-panel-heading">

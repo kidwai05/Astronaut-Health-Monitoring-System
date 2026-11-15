@@ -1,4 +1,4 @@
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import {
   Bone,
   BookOpen,
@@ -6,6 +6,7 @@ import {
   Check,
   ChevronDown,
   CloudOff,
+  Droplets,
   Eye,
   HeartPulse,
   ListChecks,
@@ -18,7 +19,7 @@ import {
   Sparkles,
   TriangleAlert,
 } from "lucide-react";
-import { StatusChip } from "./VitalisUI";
+import { StatusChip, useModalFocus } from "./VitalisUI";
 
 const topics = [
   {
@@ -44,6 +45,31 @@ const topics = [
       "Loss of strength on one side",
       "Swelling or reduced range",
       "Pain that changes movement",
+    ],
+  },
+  {
+    name: "Hydration",
+    icon: Droplets,
+    title: "Hydration check-in due",
+    current: "1",
+    unit: "entry",
+    baseline: "Mission plan",
+    change: "Due",
+    tone: "caution" as const,
+    summary: "A scheduled hydration entry has not been recorded yet.",
+    meaning:
+      "Regular hydration supports normal function. Follow the mission fluid plan and consider recent activity and cabin conditions.",
+    signal: [4, 5, 5, 4, 5, 4, 3],
+    actions: [
+      "Drink fluids according to the mission plan",
+      "Log your intake when convenient",
+      "Review any symptoms with the flight surgeon",
+    ],
+    criteria: [
+      "Persistent dizziness",
+      "Very dark urine",
+      "Unable to keep fluids down",
+      "New confusion or weakness",
     ],
   },
   {
@@ -200,9 +226,17 @@ const guidanceSections = [
 ];
 type TopicProfile = (typeof topics)[number];
 
-export function GuidanceScreen({ onNotify }: { onNotify: (message: string) => void }) {
+export function GuidanceScreen({
+  onNotify,
+  initialTopic = "Heart",
+  onNavigate,
+}: {
+  onNotify: (message: string) => void;
+  initialTopic?: string;
+  onNavigate: (screen: string) => void;
+}) {
   const [loading, setLoading] = useState(true);
-  const [topic, setTopic] = useState("Heart");
+  const [topic, setTopic] = useState(initialTopic);
   const [openSection, setOpenSection] = useState(0);
   const [criticalOpen, setCriticalOpen] = useState(false);
 
@@ -303,7 +337,11 @@ export function GuidanceScreen({ onNotify }: { onNotify: (message: string) => vo
                         }
                       }}
                     >
-                      <GuidanceSectionBody profile={profile} section={index} />
+                      <GuidanceSectionBody
+                        profile={profile}
+                        section={index}
+                        onNavigate={onNavigate}
+                      />
                     </div>
                   </div>
                 </article>
@@ -407,6 +445,7 @@ export function GuidanceScreen({ onNotify }: { onNotify: (message: string) => vo
             setOpenSection(2);
           }}
           onNotify={onNotify}
+          onNavigate={onNavigate}
         />
       )}
     </main>
@@ -446,7 +485,15 @@ function GuidanceSignal({ profile }: { profile: TopicProfile }) {
   );
 }
 
-function GuidanceSectionBody({ profile, section }: { profile: TopicProfile; section: number }) {
+function GuidanceSectionBody({
+  profile,
+  section,
+  onNavigate,
+}: {
+  profile: TopicProfile;
+  section: number;
+  onNavigate: (screen: string) => void;
+}) {
   if (section === 0) {
     return (
       <>
@@ -511,7 +558,7 @@ function GuidanceSectionBody({ profile, section }: { profile: TopicProfile; sect
           Store-and-forward ready
         </span>
       </div>
-      <button>
+      <button onClick={() => onNavigate("Flight Surgeon")}>
         <PhoneCall size={19} />
         Contact Flight Surgeon
       </button>
@@ -522,12 +569,16 @@ function GuidanceSectionBody({ profile, section }: { profile: TopicProfile; sect
 function CriticalAlert({
   onOpenGuidance,
   onNotify,
+  onNavigate,
 }: {
   onOpenGuidance: () => void;
   onNotify: (message: string) => void;
+  onNavigate: (screen: string) => void;
 }) {
   const [checked, setChecked] = useState([false, false, false]);
   const [contactState, setContactState] = useState<"idle" | "queued">("idle");
+  const alertRef = useRef<HTMLDivElement>(null);
+  useModalFocus(alertRef, true);
   const steps = [
     "Stop activity and sit or lie down safely.",
     "Repeat temperature and heart rate after 5 minutes.",
@@ -539,7 +590,13 @@ function CriticalAlert({
     onNotify("Flight surgeon message queued");
   };
   return (
-    <div className="critical-takeover" role="alertdialog" aria-modal="true">
+    <div
+      ref={alertRef}
+      className="critical-takeover"
+      role="alertdialog"
+      aria-modal="true"
+      aria-labelledby="critical-alert-title"
+    >
       <div className="critical-edge-pulse" />
       <div className="critical-content">
         <div className="critical-octagon">
@@ -548,7 +605,7 @@ function CriticalAlert({
           <i />
         </div>
         <span className="critical-kicker">CRITICAL ALERT · CANNOT BE SNOOZED</span>
-        <h1>Critical: Fever and fast heart rate</h1>
+        <h1 id="critical-alert-title">Critical: Fever and fast heart rate</h1>
         <p className="critical-intro">
           Two readings are outside the critical mission threshold. Follow the steps below and
           contact the flight surgeon.
@@ -609,7 +666,13 @@ function CriticalAlert({
             Link delayed
           </b>
         </div>
-        <button className={`contact-flight-surgeon ${contactState}`} onClick={queueContact}>
+        <button
+          className={`contact-flight-surgeon ${contactState}`}
+          onClick={() => {
+            queueContact();
+            onNavigate("Flight Surgeon");
+          }}
+        >
           {contactState === "queued" ? <Check size={25} /> : <PhoneCall size={25} />}
           {contactState === "queued" ? "Message queued" : "Contact Flight Surgeon"}
         </button>

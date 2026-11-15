@@ -15,6 +15,7 @@ import {
   ShieldCheck,
   UserRound,
 } from "lucide-react";
+import { useManagedTimeout } from "../../components/VitalisUI";
 
 type CrewStatus = "stable" | "watch" | "review";
 type CrewMember = {
@@ -142,7 +143,14 @@ const statusLabels: Record<CrewStatus, string> = {
   review: "Review",
 };
 
-export function FlightSurgeonPage({ onNotify }: { onNotify: (message: string) => void }) {
+export function FlightSurgeonPage({
+  onNotify,
+  onNavigate,
+}: {
+  onNotify: (message: string) => void;
+  onNavigate: (screen: string) => void;
+}) {
+  const scheduleTimeout = useManagedTimeout();
   const [loading, setLoading] = useState(true);
   const [selectedId, setSelectedId] = useState(crew[0].id);
   const [reviewedAlerts, setReviewedAlerts] = useState<number[]>([]);
@@ -174,7 +182,7 @@ export function FlightSurgeonPage({ onNotify }: { onNotify: (message: string) =>
     setSent(true);
     setNote("");
     onNotify(`Recommendation queued for ${selectedCrew.name}`);
-    window.setTimeout(() => setSent(false), 3500);
+    scheduleTimeout(() => setSent(false), 3500);
   };
 
   if (loading) return <FlightSurgeonSkeleton />;
@@ -358,7 +366,7 @@ export function FlightSurgeonPage({ onNotify }: { onNotify: (message: string) =>
             </div>
             <button
               className="surgeon-queue-link"
-              onClick={() => onNotify(`${openAlertCount} crew alerts remain in the review queue`)}
+              onClick={() => onNavigate("Alerts")}
             >
               View mission queue <ArrowUpRight size={15} />
             </button>

@@ -16,7 +16,7 @@ import {
   TrendingUp,
   Waves,
 } from "lucide-react";
-import { BottomSheet, StatusChip } from "./VitalisUI";
+import { BottomSheet, StatusChip, useManagedTimeout } from "./VitalisUI";
 
 type Source = "manual" | "wearable" | "camera";
 
@@ -31,10 +31,13 @@ const traces = {
 export function QuickLog({
   onNotify,
   onNavigateHome,
+  onNavigateToGuidance,
 }: {
   onNotify: (message: string) => void;
   onNavigateHome: () => void;
+  onNavigateToGuidance: (topic: string) => void;
 }) {
+  const scheduleTimeout = useManagedTimeout();
   const [loading, setLoading] = useState(true);
   const [activeStep, setActiveStep] = useState(0);
   const [source, setSource] = useState<Source>("manual");
@@ -50,9 +53,8 @@ export function QuickLog({
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const timer = window.setTimeout(() => setLoading(false), reduced ? 250 : 1050);
-    return () => clearTimeout(timer);
-  }, []);
+    scheduleTimeout(() => setLoading(false), reduced ? 250 : 1050);
+  }, [scheduleTimeout]);
 
   const startVoiceEntry = () => {
     if (listening) {
@@ -60,7 +62,7 @@ export function QuickLog({
       return;
     }
     setListening(true);
-    window.setTimeout(() => {
+    scheduleTimeout(() => {
       setListening(false);
       setHeartRate(88);
       setActiveStep(0);
@@ -71,12 +73,12 @@ export function QuickLog({
   const saveReading = () => {
     if (saveState !== "idle") return;
     setSaveState("saving");
-    window.setTimeout(() => setSaveState("saved"), 500);
-    window.setTimeout(() => {
+    scheduleTimeout(() => setSaveState("saved"), 500);
+    scheduleTimeout(() => {
       setShowResult(true);
       onNotify("Reading saved to local health record");
     }, 950);
-    window.setTimeout(() => setSaveState("idle"), 1800);
+    scheduleTimeout(() => setSaveState("idle"), 1800);
   };
 
   if (loading) return <QuickLogSkeleton />;
@@ -260,7 +262,7 @@ export function QuickLog({
           </div>
           <h3>Heart rate 88 bpm: Slightly high vs your baseline (72)</h3>
           <p>This can be influenced by recent activity, hydration, stress, or reduced sleep.</p>
-          <button className="guidance-link" onClick={() => onNotify("Heart rate guidance opened")}>
+          <button className="guidance-link" onClick={() => onNavigateToGuidance("Heart")}>
             See guidance <ChevronRight size={19} />
           </button>
           <button

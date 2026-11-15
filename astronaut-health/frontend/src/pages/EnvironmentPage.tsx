@@ -1,4 +1,4 @@
-import { useEffect, useState, type CSSProperties, type FormEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from "react";
 import {
   Activity,
   AlertCircle,
@@ -15,6 +15,7 @@ import {
   Wind,
   X,
 } from "lucide-react";
+import { useModalFocus } from "../components/VitalisUI";
 
 type MetricKey = "co2" | "oxygen" | "temperature" | "humidity" | "noise";
 type MetricDefinition = {
@@ -97,10 +98,17 @@ const initialReadings: Record<MetricKey, number> = {
 
 const metricKeys = Object.keys(metricDefinitions) as MetricKey[];
 
-export function EnvironmentPage({ onNotify }: { onNotify: (message: string) => void }) {
+export function EnvironmentPage({
+  onNotify,
+  onViewPattern,
+}: {
+  onNotify: (message: string) => void;
+  onViewPattern: () => void;
+}) {
   const [loading, setLoading] = useState(true);
   const [readings, setReadings] = useState(initialReadings);
   const [manualOpen, setManualOpen] = useState(false);
+  const modalRef = useRef<HTMLElement>(null);
   const [manualValues, setManualValues] = useState<Record<MetricKey, string>>({
     co2: String(initialReadings.co2),
     oxygen: String(initialReadings.oxygen),
@@ -124,6 +132,7 @@ export function EnvironmentPage({ onNotify }: { onNotify: (message: string) => v
     window.addEventListener("keydown", closeOnEscape);
     return () => window.removeEventListener("keydown", closeOnEscape);
   }, [manualOpen]);
+  useModalFocus(modalRef, manualOpen, () => setManualOpen(false));
 
   const openManualEntry = () => {
     setManualValues({
@@ -309,7 +318,7 @@ export function EnvironmentPage({ onNotify }: { onNotify: (message: string) => v
         <EnvironmentTrendChart />
         <button
           className="insight-action"
-          onClick={() => onNotify("Showing the recent CO₂ and symptom log comparison")}
+          onClick={onViewPattern}
         >
           View pattern <ChevronRight size={18} />
         </button>
@@ -328,6 +337,7 @@ export function EnvironmentPage({ onNotify }: { onNotify: (message: string) => v
           }}
         >
           <section
+            ref={modalRef}
             className="environment-entry-modal"
             role="dialog"
             aria-modal="true"
